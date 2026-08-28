@@ -1,5 +1,7 @@
 # Aahana Ahir — Intelligent Systems Portfolio
 
+Live portfolio: **https://aahanaahir22.github.io**
+
 An immersive, responsive technical portfolio for Aahana Ahir, a final-year Computer Science Engineering student focused on Python, AI/ML, backend systems and cloud-ready software.
 
 ## Experience
@@ -9,7 +11,6 @@ An immersive, responsive technical portfolio for Aahana Ahir, a final-year Compu
 - Interactive skills-to-project mapping
 - Four reusable, evidence-aware project case studies
 - Interactive system traces and architecture flows
-- Honest project-state, metric and evidence labels
 - Responsive mobile layouts and reduced-motion support
 - Keyboard navigation, semantic structure, sitemap and metadata
 
@@ -21,48 +22,21 @@ An immersive, responsive technical portfolio for Aahana Ahir, a final-year Compu
 - `/projects/healthbridge`
 - `/projects/suicide-prevention-microservice`
 
-## Project structure
-
-```text
-app/
-  layout.tsx                 Site metadata and shell
-  page.tsx                   Main portfolio route
-  projects/[slug]/page.tsx  Reusable case-study route
-components/
-  PortfolioExperience.tsx   Main interactive experience
-  ProjectTrace.tsx          Case-study system simulator
-data/
-  projects.ts               Editable project content
-```
-
 ## Local development
 
 Requirements: Node.js 22.13 or newer.
 
 ```bash
-npm ci
+npm install
 npm run dev
 ```
 
-Run the production build with:
-
-```bash
-npm run build
-```
-
-Create the static GitHub Pages build with:
+Create the production GitHub Pages export with:
 
 ```bash
 npm run build:github
 ```
 
-The included GitHub Actions workflow publishes the `out` directory whenever
-the `main` branch is updated. For the address `https://aahanaahir22.github.io`,
-the repository must be named exactly `aahanaahir22.github.io` and GitHub Pages
-must use **GitHub Actions** as its source.
+The GitHub Actions workflow builds and republishes the portfolio whenever the `main` branch changes.
 
-## Content updates
-
-Project content, statuses, evaluation plans and architecture stages live in `data/projects.ts`. Replace the disabled résumé, GitHub and demo placeholders only after the corresponding URLs or files are verified.
-
-The portfolio intentionally does not invent repositories, metrics, clients, testimonials, users or deployment claims. Prototype results and future evaluation criteria remain visually separate.
+Project claims, prototype results and future evaluation criteria are intentionally separated so the portfolio does not fabricate repositories, metrics, users or deployment evidence.
