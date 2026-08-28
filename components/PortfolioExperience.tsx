@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -83,18 +83,22 @@ const certifications = [
 
 function useAmbientSound() {
   const contextRef = useRef<AudioContext | null>(null);
-  const nodesRef = useRef<{ oscillator: OscillatorNode; gain: GainNode } | null>(null);
+  const nodesRef = useRef<{ master: GainNode; pads: OscillatorNode[]; timer: number } | null>(null);
   const [enabled, setEnabled] = useState(false);
 
   const stop = () => {
     const context = contextRef.current;
     const nodes = nodesRef.current;
     if (nodes && context) {
-      nodes.gain.gain.setTargetAtTime(0, context.currentTime, 0.08);
+      window.clearInterval(nodes.timer);
+      nodes.master.gain.cancelScheduledValues(context.currentTime);
+      nodes.master.gain.setTargetAtTime(0.0001, context.currentTime, 0.16);
+      nodes.pads.forEach((oscillator) => {
+        try { oscillator.stop(context.currentTime + 0.8); } catch { /* already stopped */ }
+      });
       window.setTimeout(() => {
-        try { nodes.oscillator.stop(); } catch { /* already stopped */ }
-        void context.close();
-      }, 240);
+        if (context.state !== "closed") void context.close();
+      }, 900);
     }
     nodesRef.current = null;
     contextRef.current = null;
@@ -103,21 +107,91 @@ function useAmbientSound() {
   };
 
   const start = () => {
-    if (contextRef.current) return;
+    if (contextRef.current) {
+      if (contextRef.current.state === "suspended") void contextRef.current.resume();
+      setEnabled(true);
+      return;
+    }
     const WebkitContext = (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     const AudioContextClass = window.AudioContext || WebkitContext;
     if (!AudioContextClass) return;
     const context = new AudioContextClass();
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-    oscillator.type = "sine";
-    oscillator.frequency.value = 52;
-    gain.gain.value = 0.0001;
-    oscillator.connect(gain).connect(context.destination);
-    oscillator.start();
-    gain.gain.exponentialRampToValueAtTime(0.018, context.currentTime + 1.4);
+    const master = context.createGain();
+    const compressor = context.createDynamicsCompressor();
+    const filter = context.createBiquadFilter();
+    const delay = context.createDelay(1);
+    const feedback = context.createGain();
+
+    compressor.threshold.value = -22;
+    compressor.knee.value = 18;
+    compressor.ratio.value = 7;
+    compressor.attack.value = 0.012;
+    compressor.release.value = 0.32;
+    filter.type = "lowpass";
+    filter.frequency.value = 1800;
+    filter.Q.value = 0.8;
+    delay.delayTime.value = 0.31;
+    feedback.gain.value = 0.2;
+    master.gain.setValueAtTime(0.0001, context.currentTime);
+    master.gain.exponentialRampToValueAtTime(0.42, context.currentTime + 1.25);
+
+    filter.connect(master);
+    filter.connect(delay);
+    delay.connect(feedback);
+    feedback.connect(delay);
+    delay.connect(master);
+    master.connect(compressor).connect(context.destination);
+
+    const padFrequencies = [110, 164.81, 220];
+    const pads = padFrequencies.map((frequency, index) => {
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.type = index === 1 ? "triangle" : "sine";
+      oscillator.frequency.value = frequency;
+      oscillator.detune.value = [-7, 4, 9][index];
+      gain.gain.value = index === 1 ? 0.026 : 0.032;
+      oscillator.connect(gain).connect(filter);
+      oscillator.start();
+      return oscillator;
+    });
+
+    const sequence = [329.63, 392, 493.88, 587.33, 493.88, 440, 349.23, 392];
+    let step = 0;
+    const scheduleNote = () => {
+      if (context.state === "closed") return;
+      const now = context.currentTime;
+      const oscillator = context.createOscillator();
+      const envelope = context.createGain();
+      oscillator.type = step % 3 === 0 ? "triangle" : "sine";
+      oscillator.frequency.setValueAtTime(sequence[step % sequence.length], now);
+      oscillator.detune.value = step % 2 === 0 ? -4 : 5;
+      envelope.gain.setValueAtTime(0.0001, now);
+      envelope.gain.exponentialRampToValueAtTime(0.082, now + 0.035);
+      envelope.gain.exponentialRampToValueAtTime(0.0001, now + 0.95);
+      oscillator.connect(envelope).connect(filter);
+      oscillator.start(now);
+      oscillator.stop(now + 1);
+
+      if (step % 4 === 0) {
+        const pulseOscillator = context.createOscillator();
+        const pulseGain = context.createGain();
+        pulseOscillator.type = "sine";
+        pulseOscillator.frequency.setValueAtTime(72, now);
+        pulseOscillator.frequency.exponentialRampToValueAtTime(46, now + 0.42);
+        pulseGain.gain.setValueAtTime(0.07, now);
+        pulseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+        pulseOscillator.connect(pulseGain).connect(master);
+        pulseOscillator.start(now);
+        pulseOscillator.stop(now + 0.48);
+      }
+      step += 1;
+    };
+
+    scheduleNote();
+    const timer = window.setInterval(scheduleNote, 430);
     contextRef.current = context;
-    nodesRef.current = { oscillator, gain };
+    nodesRef.current = { master, pads, timer };
+    if (context.state === "suspended") void context.resume();
     setEnabled(true);
     sessionStorage.setItem("aahana-sound", "on");
   };
@@ -130,9 +204,10 @@ function useAmbientSound() {
     oscillator.frequency.value = 420;
     oscillator.type = "sine";
     gain.gain.setValueAtTime(0.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.025, context.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.09, context.currentTime + 0.02);
     gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.16);
-    oscillator.connect(gain).connect(context.destination);
+    const destination = nodesRef.current?.master || context.destination;
+    oscillator.connect(gain).connect(destination);
     oscillator.start();
     oscillator.stop(context.currentTime + 0.18);
   };
@@ -142,15 +217,17 @@ function useAmbientSound() {
       const context = contextRef.current;
       if (!context) return;
       if (document.hidden) void context.suspend();
-      else if (enabled) void context.resume();
+      else if (sessionStorage.getItem("aahana-sound") === "on") void context.resume();
     };
     document.addEventListener("visibilitychange", onVisibility);
     return () => {
       document.removeEventListener("visibilitychange", onVisibility);
+      const nodes = nodesRef.current;
+      if (nodes) window.clearInterval(nodes.timer);
       const context = contextRef.current;
       if (context) void context.close();
     };
-  }, [enabled]);
+  }, []);
 
   return { enabled, start, stop, pulse };
 }
@@ -159,9 +236,17 @@ export function IntelligenceCore({ compact = false }: { compact?: boolean }) {
   return (
     <div className={`intelligence-core ${compact ? "core-compact" : ""}`} aria-hidden="true">
       <div className="core-aura" />
+      <div className="core-plane plane-a" />
+      <div className="core-plane plane-b" />
       <div className="core-orbit orbit-a"><i /><i /><i /></div>
       <div className="core-orbit orbit-b"><i /><i /><i /><i /></div>
       <div className="core-orbit orbit-c"><i /><i /></div>
+      <svg className="core-neural-web" viewBox="0 0 400 400">
+        <path d="M64 210 L142 112 L205 188 L286 85 L337 196" />
+        <path d="M70 292 L142 112 L222 300 L337 196" />
+        <path d="M64 210 L205 188 L222 300 L305 334" />
+        {[ [64, 210], [70, 292], [142, 112], [205, 188], [222, 300], [286, 85], [337, 196], [305, 334] ].map(([cx, cy], index) => <circle key={index} cx={cx} cy={cy} r={index % 3 === 0 ? 5 : 3.5} />)}
+      </svg>
       <div className="core-sphere">
         <span className="core-grid" />
         <span className="core-point point-a" />
@@ -176,6 +261,49 @@ export function IntelligenceCore({ compact = false }: { compact?: boolean }) {
   );
 }
 
+function NeuralTrace() {
+  const layers = [4, 6, 5, 3];
+  return (
+    <section className="neural-trace section-pad" aria-labelledby="neural-title">
+      <div className="neural-copy">
+        <p className="section-code">SYS.00B / NEURAL TRACE</p>
+        <h2 id="neural-title">From signal to<br /><em>explainable output.</em></h2>
+        <p>A living map of the engineering path I use for intelligent systems: normalize the input, form useful representations, ground the model and keep the final decision visible.</p>
+        <div className="neural-legend"><span>01 / SIGNAL</span><span>02 / EMBEDDING</span><span>03 / INFERENCE</span><span>04 / OUTPUT</span></div>
+      </div>
+      <div className="neural-stage" aria-hidden="true">
+        <div className="neural-depth-grid" />
+        <svg viewBox="0 0 720 430" role="presentation">
+          <defs>
+            <linearGradient id="neural-flow" x1="0" x2="1"><stop stopColor="#6fe5ff" stopOpacity=".12" /><stop offset=".5" stopColor="#7e66ff" stopOpacity=".85" /><stop offset="1" stopColor="#65f5b5" stopOpacity=".2" /></linearGradient>
+          </defs>
+          {layers.slice(0, -1).flatMap((count, layerIndex) => {
+            const nextCount = layers[layerIndex + 1];
+            const x1 = 96 + layerIndex * 172;
+            const x2 = 96 + (layerIndex + 1) * 172;
+            return Array.from({ length: count }).flatMap((_, from) => Array.from({ length: nextCount }).map((__, to) => {
+              const y1 = 215 - ((count - 1) * 48) / 2 + from * 48;
+              const y2 = 215 - ((nextCount - 1) * 48) / 2 + to * 48;
+              return <line className="neural-connection" key={`${layerIndex}-${from}-${to}`} x1={x1} y1={y1} x2={x2} y2={y2} style={{ animationDelay: `${(from + to + layerIndex) * 90}ms` }} />;
+            }));
+          })}
+          {layers.flatMap((count, layerIndex) => {
+            const x = 96 + layerIndex * 172;
+            return Array.from({ length: count }).map((_, nodeIndex) => {
+              const y = 215 - ((count - 1) * 48) / 2 + nodeIndex * 48;
+              return <g className="neural-node" key={`${layerIndex}-${nodeIndex}`} style={{ animationDelay: `${(layerIndex * 180) + (nodeIndex * 70)}ms` }}><circle cx={x} cy={y} r="12" /><circle className="node-core" cx={x} cy={y} r="3" /></g>;
+            });
+          })}
+          <path className="neural-signal-path" d="M42 215 C120 90 210 345 292 215 S470 88 642 215" />
+        </svg>
+        <div className="model-readout readout-a"><span>VECTOR SPACE</span><b>INDEXED</b></div>
+        <div className="model-readout readout-b"><span>MODEL STATE</span><b>GROUNDED</b></div>
+        <div className="model-readout readout-c"><span>HUMAN LAYER</span><b>VISIBLE</b></div>
+      </div>
+    </section>
+  );
+}
+
 function EntryGate({ onEnter }: { onEnter: (sound: boolean) => void }) {
   return (
     <div className="entry-gate" role="dialog" aria-modal="true" aria-labelledby="entry-title">
@@ -183,7 +311,8 @@ function EntryGate({ onEnter }: { onEnter: (sound: boolean) => void }) {
       <div className="entry-core"><IntelligenceCore compact /></div>
       <p className="eyebrow">INTELLIGENT SYSTEMS UNIVERSE / 2027</p>
       <h1 id="entry-title">Choose your signal.</h1>
-      <p className="entry-copy">Sound adds a subtle computational pulse. The full experience remains identical without it.</p>
+      <p className="entry-copy">Enter with a cinematic generative synth score—layered ambient pads, neural pulses and a live arpeggio composed in your browser.</p>
+      <div className="entry-audio-meter" aria-hidden="true"><span>AUDIO SCORE / READY</span><i /><i /><i /><i /><i /><i /></div>
       <div className="entry-actions">
         <button onClick={() => onEnter(true)}><Volume2 size={17} /> Enter with sound</button>
         <button onClick={() => onEnter(false)}><VolumeX size={17} /> Continue silently</button>
@@ -215,10 +344,11 @@ export default function PortfolioExperience() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const heroCoreRef = useRef<HTMLDivElement>(null);
   const { enabled: soundEnabled, start: startSound, stop: stopSound, pulse } = useAmbientSound();
 
   useEffect(() => {
-    if (sessionStorage.getItem("aahana-entered") === "yes") {
+    if (sessionStorage.getItem("aahana-entered-v2") === "yes") {
       document.body.classList.add("system-entered");
       queueMicrotask(() => setEntered(true));
     }
@@ -234,13 +364,55 @@ export default function PortfolioExperience() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const onPointerMove = (event: PointerEvent) => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const target = heroCoreRef.current;
+        if (!target) return;
+        const rotateY = ((event.clientX / window.innerWidth) - 0.5) * 13;
+        const rotateX = ((event.clientY / window.innerHeight) - 0.5) * -9;
+        target.style.setProperty("--tilt-x", `${rotateX.toFixed(2)}deg`);
+        target.style.setProperty("--tilt-y", `${rotateY.toFixed(2)}deg`);
+      });
+    };
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("pointermove", onPointerMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    const targets = document.querySelectorAll<HTMLElement>(".manifesto-section, .neural-trace, .section-heading, .scan-panel, .skill-row, .project-row, .experience-entry, .education-grid, .credential-row");
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      targets.forEach((target) => target.classList.add("reveal-target", "is-visible"));
+      return;
+    }
+    targets.forEach((target, index) => {
+      target.classList.add("reveal-target");
+      target.style.setProperty("--reveal-delay", `${(index % 4) * 70}ms`);
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6%" });
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+
   const highlighted = useMemo(() => selectedSkill ? skillMap[selectedSkill] || [] : [], [selectedSkill]);
 
   const enter = (withSound: boolean) => {
     if (withSound) startSound();
     else sessionStorage.setItem("aahana-sound", "off");
     setEntered(true);
-    sessionStorage.setItem("aahana-entered", "yes");
+    sessionStorage.setItem("aahana-entered-v2", "yes");
     document.body.classList.add("system-entered");
   };
 
@@ -263,6 +435,7 @@ export default function PortfolioExperience() {
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
         </nav>
         <div className="nav-actions">
+          <span className={`sound-status ${soundEnabled ? "is-live" : ""}`} aria-live="polite"><i />{soundEnabled ? "SCORE LIVE" : "SCORE OFF"}</span>
           <button className="icon-button" onClick={() => soundEnabled ? stopSound() : startSound()} aria-label={soundEnabled ? "Mute ambient sound" : "Enable ambient sound"} data-cursor={soundEnabled ? "MUTE" : "SOUND"}>
             {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
           </button>
@@ -274,6 +447,9 @@ export default function PortfolioExperience() {
 
       <section id="top" className="hero-scene">
         <div className="hero-grid" />
+        <div className="data-rain" aria-hidden="true">
+          {["0101", "RAG", "∇L", "VECTOR", "AI", "TOKEN", "HITL", "PY", "MODEL", "API"].map((token, index) => <span key={token} style={{ "--stream": index } as CSSProperties}>{token}</span>)}
+        </div>
         <div className="hero-copy">
           <p className="eyebrow"><span className="live-dot" /> INDIA / OPEN WORLDWIDE</p>
           <h1><span>Aahana</span><span>Ahir</span></h1>
@@ -285,7 +461,7 @@ export default function PortfolioExperience() {
             <a href="mailto:aahanaahir10@gmail.com" className="text-link">Start a conversation <ArrowUpRight size={16} /></a>
           </div>
         </div>
-        <div className="hero-core-wrap">
+        <div ref={heroCoreRef} className="hero-core-wrap">
           <IntelligenceCore />
           <div className="telemetry telemetry-a"><span>RETRIEVAL</span><b>READY</b></div>
           <div className="telemetry telemetry-b"><span>CONTROL</span><b>HUMAN</b></div>
@@ -299,6 +475,8 @@ export default function PortfolioExperience() {
         <p className="manifesto">Software earns trust when the path from <span>signal</span> to <span>decision</span> stays visible.</p>
         <div className="principle-line"><span>01 / UNDERSTAND</span><span>02 / GROUND</span><span>03 / BUILD</span><span>04 / VERIFY</span></div>
       </section>
+
+      <NeuralTrace />
 
       <section id="profile" className="profile-scene section-pad">
         <div className="section-heading">
