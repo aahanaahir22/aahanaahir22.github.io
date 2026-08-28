@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://aahanaahir22.github.io</loc>
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://aahanaahir22.github.io/projects/opsassist-ai</loc>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://aahanaahir22.github.io/projects/integratex</loc>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://aahanaahir22.github.io/projects/healthbridge</loc>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://aahanaahir22.github.io/projects/suicide-prevention-microservice</loc>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+</urlset>
