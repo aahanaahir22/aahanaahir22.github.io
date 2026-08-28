@@ -1,2 +1,2 @@
-:HL["/_next/static/chunks/16heyza6syalo.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"projects","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"healthbridge","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"xPT7D7dSS2Hkyr6bNBoja"}
+:HL["/_next/static/chunks/14m84gwjt9rto.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"projects","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"healthbridge","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"m173ejBZpOqL_PZcpoeCz"}

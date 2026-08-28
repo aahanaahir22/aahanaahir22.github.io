@@ -178,12 +178,14 @@ a { color: inherit; text-decoration: none; }
 
 .credentials-section { background: #050a0f; }
 .credentials-table { border-top: 1px solid var(--line); }
-.credential-row { min-height: 5.2rem; display: grid; grid-template-columns: 3rem 5rem 1fr .65fr 6rem; gap: 1rem; align-items: center; border-bottom: 1px solid var(--line); }
+.credential-row { min-height: 5.6rem; display: grid; grid-template-columns: 3rem 5.5rem 1fr .65fr 7rem; gap: 1rem; align-items: center; border-bottom: 1px solid var(--line); }
 .credential-row > span:first-child { color: #536a7c; font: .55rem ui-monospace, monospace; }
 .credential-row b { color: var(--cyan); font: 600 .58rem ui-monospace, monospace; letter-spacing: .12em; }
 .credential-row h3 { font: 400 1.15rem Georgia, serif; }
 .credential-row p { color: #788d9d; font-size: .7rem; }
-.credential-state { color: var(--green); font: .5rem ui-monospace, monospace; letter-spacing: .1em; }
+.credential-row p small { display: block; margin-top: .45rem; color: #536a7c; font: .5rem ui-monospace, monospace; letter-spacing: .09em; }
+.credential-link { display: inline-flex; align-items: center; justify-content: flex-end; gap: .4rem; color: var(--green); font: 600 .52rem ui-monospace, monospace; letter-spacing: .11em; text-decoration: none; transition: color .2s ease, transform .2s ease; }
+.credential-link:hover, .credential-link:focus-visible { color: #fff; transform: translateX(3px); }
 .achievement-signal { display: grid; grid-template-columns: .4fr 1fr; gap: 2rem; margin-top: 5rem; align-items: center; border-top: 1px solid rgba(111,229,255,.4); padding-top: 2rem; }
 .achievement-signal span { font: 400 clamp(5rem, 10vw, 10rem)/1 Georgia, serif; color: var(--cyan); }
 .achievement-signal p { max-width: 35rem; color: #8398a9; line-height: 1.7; }
@@ -256,7 +258,7 @@ footer { min-height: 5rem; padding: 0 clamp(1.5rem, 6vw, 7rem); border-top: 1px 
   .course-grid { grid-template-columns: 1fr; }
   .credential-row { grid-template-columns: 2rem 3rem 1fr; padding: 1rem 0; }
   .credential-row p { grid-column: 3; margin: 0; }
-  .credential-state { display: none; }
+  .credential-link { grid-column: 3; justify-content: flex-start; margin-top: .25rem; }
   .achievement-signal { grid-template-columns: 1fr; }
   .contact-actions { flex-direction: column; width: 100%; }
   .contact-actions > * { justify-content: center; }

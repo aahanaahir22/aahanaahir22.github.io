@@ -37,13 +37,48 @@ const skillMap: Record<string, string[]> = {
 };
 
 const certifications = [
-  ["AWS", "Certified Cloud Practitioner", "Amazon Web Services"],
-  ["AZ-900", "Azure Fundamentals", "Microsoft"],
-  ["ML", "Introduction to Machine Learning", "NPTEL"],
-  ["GEN AI", "Using IBM watsonx", "IBM"],
-  ["AI/ML", "Fundamentals of ML & AI", "Amazon Web Services"],
-  ["GEN AI", "Introduction to Generative AI", "AWS Educate"],
-  ["IT", "Google IT Support Certificate", "Google"],
+  {
+    code: "GOOGLE",
+    title: "Google IT Support Certificate",
+    issuer: "Google",
+    issued: "Mar 2026",
+    credentialUrl: "https://www.credly.com/badges/285c98dd-27a8-4841-86a7-1eb9ee7a640b/linked_in_profile",
+  },
+  {
+    code: "NETWORK",
+    title: "The Bits and Bytes of Computer Networking",
+    issuer: "Google",
+    issued: "Nov 2025",
+    credentialUrl: "https://www.coursera.org/account/accomplishments/verify/YNSCCNS6GJNX",
+  },
+  {
+    code: "AWS",
+    title: "AWS Educate Introduction to Generative AI",
+    issuer: "Amazon Web Services",
+    issued: "Jul 2025",
+    credentialUrl: "https://www.credly.com/badges/c1388cdc-f0ce-4c41-829f-3b5a68cf6d28/linked_in_profile",
+  },
+  {
+    code: "IBM",
+    title: "GEN AI Using IBM Watsonx",
+    issuer: "IBM",
+    issued: "Jun 2025",
+    credentialUrl: "https://courses.adroitprolearn.skillsnetwork.site/certificates/d8f15675eb49481fa8c64848731b16da",
+  },
+  {
+    code: "NPTEL",
+    title: "Introduction to Machine Learning",
+    issuer: "NPTEL / IIT Madras",
+    issued: "Jan-Apr 2025",
+    credentialUrl: "/certificates/nptel-introduction-to-machine-learning.pdf",
+  },
+  {
+    code: "ANALYTICS",
+    title: "Google Analytics Certification",
+    issuer: "Google Digital Academy",
+    issued: "Oct 2024",
+    credentialUrl: "https://skillshop.credential.net/4be459ff-f634-460f-bbb5-92f0660f9fc4",
+  },
 ];
 
 function useAmbientSound() {
@@ -365,10 +400,26 @@ export default function PortfolioExperience() {
       <section className="credentials-section section-pad">
         <div className="work-heading">
           <div><p className="section-code">SYS.06 / EVIDENCE ARCHIVE</p><h2>Credentials,<br /><em>indexed.</em></h2></div>
-          <p>Verification links, issue dates and credential IDs can be attached when supplied. None are fabricated here.</p>
+          <p>Every listed certificate opens independent completion evidence. Unverified entries are intentionally excluded.</p>
         </div>
         <div className="credentials-table">
-          {certifications.map(([code, title, issuer], index) => <div className="credential-row" key={title}><span>{String(index + 1).padStart(2, "0")}</span><b>{code}</b><h3>{title}</h3><p>{issuer}</p><span className="credential-state">ARCHIVED</span></div>)}
+          {certifications.map((certificate, index) => (
+            <div className="credential-row" key={certificate.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <b>{certificate.code}</b>
+              <h3>{certificate.title}</h3>
+              <p>{certificate.issuer}<small>ISSUED {certificate.issued}</small></p>
+              <a
+                className="credential-link"
+                href={certificate.credentialUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Verify ${certificate.title}`}
+              >
+                VERIFY <ExternalLink size={12} />
+              </a>
+            </div>
+          ))}
         </div>
         <div className="achievement-signal"><span>500+</span><p>Google Cloud Skills Boost Arcade badges across cloud, data, security and generative AI learning tracks.</p></div>
       </section>
