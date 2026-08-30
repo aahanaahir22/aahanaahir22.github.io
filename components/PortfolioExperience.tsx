@@ -9,6 +9,7 @@ import {
   Download,
   ExternalLink,
   GitBranch,
+  Languages,
   Mail,
   Menu,
   Volume2,
@@ -16,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { projects } from "@/data/projects";
+import { languageOptions } from "@/data/resume";
 
 const skillGroups = [
   { label: "Language layer", skills: ["Python", "Java", "SQL"] },
@@ -431,6 +433,7 @@ export default function PortfolioExperience() {
         <nav className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Primary navigation">
           <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
           <a href="#profile" onClick={() => setMenuOpen(false)}>Profile</a>
+          <a href="#languages" onClick={() => setMenuOpen(false)}>Languages</a>
           <a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
         </nav>
@@ -495,6 +498,43 @@ export default function PortfolioExperience() {
             <div><span>Trajectory</span><b>International / Remote</b></div>
           </div>
           <p className="scan-note">Targeting entry-level opportunities across Software Engineering, Python Development, AI/ML Engineering and Solutions Engineering.</p>
+        </div>
+      </section>
+
+
+      <section id="languages" className="language-universe section-pad">
+        <div className="language-heading">
+          <div>
+            <p className="section-code">SYS.01B / LANGUAGE CONSTELLATION</p>
+            <h2>Six languages.<br /><em>Six visual worlds.</em></h2>
+          </div>
+          <p>Choose a language to open my complete résumé in that language. Each mode changes its typography, color system and animated 3D visualization while preserving the same professional evidence.</p>
+        </div>
+        <div className="language-constellation">
+          <div className="language-stage" aria-hidden="true">
+            <div className="language-sphere">
+              <i className="language-particle p1" /><i className="language-particle p2" /><i className="language-particle p3" />
+            </div>
+            <span className="language-stage-label one">6 LANGUAGE SYSTEMS</span>
+            <span className="language-stage-label two">LIVE RÉSUMÉ TRANSLATION</span>
+          </div>
+          <div className="language-card-grid">
+            {languageOptions.map((language, index) => (
+              <Link
+                href={`/resume?lang=${language.code}`}
+                className="language-card"
+                data-glyph={language.glyph}
+                data-cursor="OPEN RÉSUMÉ"
+                key={language.code}
+                onClick={pulse}
+              >
+                <span>LANG / {String(index + 1).padStart(2, "0")}</span>
+                <Languages size={16} />
+                <h3>{language.nativeLabel}</h3>
+                <p>{language.label} · {language.level}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -610,8 +650,8 @@ export default function PortfolioExperience() {
         <div className="contact-actions">
           <a className="signal-button" href="mailto:aahanaahir10@gmail.com" data-cursor="CONNECT"><Mail size={18} /> Start a conversation</a>
           <a className="outline-link" href="https://www.linkedin.com/in/aahanaahir02/" target="_blank" rel="noreferrer"><Contact size={17} /> LinkedIn <ExternalLink size={14} /></a>
-          <button className="outline-link is-placeholder" disabled title="Resume file will be linked when supplied"><Download size={17} /> Résumé / pending</button>
-          <button className="outline-link is-placeholder" disabled title="GitHub profile will be linked when supplied"><GitBranch size={17} /> GitHub / pending</button>
+          <Link className="outline-link" href="/resume"><Download size={17} /> Multilingual résumé <ArrowUpRight size={14} /></Link>
+          <a className="outline-link" href="https://github.com/aahanaahir22" target="_blank" rel="noreferrer"><GitBranch size={17} /> GitHub <ExternalLink size={14} /></a>
         </div>
         <div className="contact-meta"><span>INDIA / UTC+5:30</span><a href="mailto:aahanaahir10@gmail.com">AAHANAAHIR10@GMAIL.COM</a><span>AVAILABLE / 2027</span></div>
       </section>
