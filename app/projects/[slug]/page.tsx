@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Database, GitBranch, Play, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Database, ExternalLink, GitBranch, Play, ShieldCheck } from "lucide-react";
 import ProjectTrace from "@/components/ProjectTrace";
 import { getProject, projects } from "@/data/projects";
 
@@ -99,13 +99,24 @@ export default async function ProjectPage({ params }: PageProps) {
       </section>
 
       <section className="roadmap-section case-pad">
-        <div className="roadmap-state"><p className="section-code">08 / CURRENT STATE</p><span className={`status-dot ${project.statusTone}`} /><h2>{project.status}</h2><p>Architecture and intended evaluation are shown transparently. Repository evidence and live demos will be linked only when supplied.</p></div>
+        <div className="roadmap-state"><p className="section-code">08 / CURRENT STATE</p><span className={`status-dot ${project.statusTone}`} /><h2>{project.status}</h2><p>{project.repositoryUrl || project.demoUrl ? "The source repository and live demonstration are available below. Project limitations and synthetic-remediation boundaries remain explicit." : "Architecture and intended evaluation are shown transparently. Repository evidence and live demos will be linked only when supplied."}</p></div>
         <div className="roadmap-list"><p className="section-code">NEXT TRANSMISSIONS</p>{project.next.map((item, itemIndex) => <div key={item}><span>{String(itemIndex + 1).padStart(2, "0")}</span><p>{item}</p></div>)}</div>
       </section>
 
       <section className="evidence-actions case-pad">
-        <div><p className="section-code">EVIDENCE LINKS</p><h2>Source proof,<br />when ready.</h2></div>
-        <div><button disabled><GitBranch size={18} /> Repository / pending</button><button disabled><Play size={18} /> Demo / pending</button></div>
+        <div><p className="section-code">EVIDENCE LINKS</p><h2>Source proof,<br />{project.repositoryUrl || project.demoUrl ? "connected." : "when ready."}</h2></div>
+        <div>
+          {project.repositoryUrl ? (
+            <a href={project.repositoryUrl} target="_blank" rel="noreferrer" aria-label={`Open the ${project.shortName} GitHub repository`}>
+              <GitBranch size={18} /> GitHub repository <ExternalLink size={14} />
+            </a>
+          ) : <button disabled><GitBranch size={18} /> Repository / pending</button>}
+          {project.demoUrl ? (
+            <a href={project.demoUrl} target="_blank" rel="noreferrer" aria-label={`Open the ${project.shortName} live demo`}>
+              <Play size={18} /> Live demo <ExternalLink size={14} />
+            </a>
+          ) : <button disabled><Play size={18} /> Demo / pending</button>}
+        </div>
       </section>
 
       <Link className="next-system" href={`/projects/${next.slug}`}>
