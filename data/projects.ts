@@ -17,6 +17,8 @@ export type Project = {
   next: string[];
   notice?: string;
   measured?: { value: string; label: string; context: string }[];
+  repositoryUrl?: string;
+  demoUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -26,11 +28,13 @@ export const projects: Project[] = [
     shortName: "OpsAssist AI",
     title: "Evidence-Backed Incident Diagnosis & Resolution",
     tagline: "From noisy operational signals to an explainable, approval-gated response.",
-    status: "In Development",
-    statusTone: "amber",
+    status: "Live Demo · Active Development",
+    statusTone: "green",
     stack: ["React", "Python", "FastAPI", "PostgreSQL", "FAISS", "LLM API", "Docker", "AWS"],
+    repositoryUrl: "https://github.com/aahanaahir22/opsassist-ai",
+    demoUrl: "https://aahanaahir22.github.io/opsassist-ai/",
     problem: "Production incident response is slowed by fragmented logs, alerts, runbooks and advice that is difficult to verify.",
-    solution: "OpsAssist AI is being designed to group related operational events, retrieve approved runbook evidence and propose diagnoses with visible confidence, citations and human control.",
+    solution: "OpsAssist AI is a deployed incident-intelligence demonstration that groups operational signals, retrieves runbook evidence and presents diagnoses with visible confidence, citations and human control. The public interface connects to a live Python API and PostgreSQL.",
     principles: ["Evidence before recommendation", "Human approval for sensitive actions", "Trace every system decision", "Confirm observed outcomes only"],
     evaluation: ["Diagnostic precision", "Evidence coverage", "API latency", "Approval-policy compliance", "Recommendation traceability"],
     architecture: [
@@ -53,7 +57,8 @@ export const projects: Project[] = [
       { title: "PostgreSQL for the audit spine", body: "Relational records make incidents, approvals and evidence references queryable and testable." },
       { title: "Typed FastAPI boundaries", body: "Explicit request and response models reduce ambiguous integrations across the dashboard and workers." },
     ],
-    next: ["Complete ingestion and correlation service", "Build benchmark incident set", "Add policy test suite", "Deploy monitored AWS environment"],
+    next: ["Add production-grade OAuth/RBAC and tenant isolation", "Expand persistent embedding and retrieval evaluation", "Connect a production LLM provider to the typed workflow", "Broaden end-to-end, resilience and security testing"],
+    notice: "The public demo connects to a live Python backend and PostgreSQL. Remediation runs only against a synthetic simulator—not real customer infrastructure.",
   },
   {
     number: "002",
