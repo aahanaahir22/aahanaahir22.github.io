@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import MotionExperience from "@/components/MotionExperience";
 
 export const metadata: Metadata = {
   title: "Aahana Ahir — Intelligent Systems Portfolio",
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body><MotionExperience />{children}</body></html>;
 }

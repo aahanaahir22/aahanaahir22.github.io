@@ -12,8 +12,6 @@ import {
   Languages,
   Mail,
   Menu,
-  Volume2,
-  VolumeX,
   X,
 } from "lucide-react";
 import { projects } from "@/data/projects";
@@ -82,157 +80,6 @@ const certifications = [
     credentialUrl: "https://skillshop.credential.net/4be459ff-f634-460f-bbb5-92f0660f9fc4",
   },
 ];
-
-function useAmbientSound() {
-  const contextRef = useRef<AudioContext | null>(null);
-  const nodesRef = useRef<{ master: GainNode; pads: OscillatorNode[]; timer: number } | null>(null);
-  const [enabled, setEnabled] = useState(false);
-
-  const stop = () => {
-    const context = contextRef.current;
-    const nodes = nodesRef.current;
-    if (nodes && context) {
-      window.clearInterval(nodes.timer);
-      nodes.master.gain.cancelScheduledValues(context.currentTime);
-      nodes.master.gain.setTargetAtTime(0.0001, context.currentTime, 0.16);
-      nodes.pads.forEach((oscillator) => {
-        try { oscillator.stop(context.currentTime + 0.8); } catch { /* already stopped */ }
-      });
-      window.setTimeout(() => {
-        if (context.state !== "closed") void context.close();
-      }, 900);
-    }
-    nodesRef.current = null;
-    contextRef.current = null;
-    setEnabled(false);
-    sessionStorage.setItem("aahana-sound", "off");
-  };
-
-  const start = () => {
-    if (contextRef.current) {
-      if (contextRef.current.state === "suspended") void contextRef.current.resume();
-      setEnabled(true);
-      return;
-    }
-    const WebkitContext = (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-    const AudioContextClass = window.AudioContext || WebkitContext;
-    if (!AudioContextClass) return;
-    const context = new AudioContextClass();
-    const master = context.createGain();
-    const compressor = context.createDynamicsCompressor();
-    const filter = context.createBiquadFilter();
-    const delay = context.createDelay(1);
-    const feedback = context.createGain();
-
-    compressor.threshold.value = -22;
-    compressor.knee.value = 18;
-    compressor.ratio.value = 7;
-    compressor.attack.value = 0.012;
-    compressor.release.value = 0.32;
-    filter.type = "lowpass";
-    filter.frequency.value = 1800;
-    filter.Q.value = 0.8;
-    delay.delayTime.value = 0.31;
-    feedback.gain.value = 0.2;
-    master.gain.setValueAtTime(0.0001, context.currentTime);
-    master.gain.exponentialRampToValueAtTime(0.42, context.currentTime + 1.25);
-
-    filter.connect(master);
-    filter.connect(delay);
-    delay.connect(feedback);
-    feedback.connect(delay);
-    delay.connect(master);
-    master.connect(compressor).connect(context.destination);
-
-    const padFrequencies = [110, 164.81, 220];
-    const pads = padFrequencies.map((frequency, index) => {
-      const oscillator = context.createOscillator();
-      const gain = context.createGain();
-      oscillator.type = index === 1 ? "triangle" : "sine";
-      oscillator.frequency.value = frequency;
-      oscillator.detune.value = [-7, 4, 9][index];
-      gain.gain.value = index === 1 ? 0.026 : 0.032;
-      oscillator.connect(gain).connect(filter);
-      oscillator.start();
-      return oscillator;
-    });
-
-    const sequence = [329.63, 392, 493.88, 587.33, 493.88, 440, 349.23, 392];
-    let step = 0;
-    const scheduleNote = () => {
-      if (context.state === "closed") return;
-      const now = context.currentTime;
-      const oscillator = context.createOscillator();
-      const envelope = context.createGain();
-      oscillator.type = step % 3 === 0 ? "triangle" : "sine";
-      oscillator.frequency.setValueAtTime(sequence[step % sequence.length], now);
-      oscillator.detune.value = step % 2 === 0 ? -4 : 5;
-      envelope.gain.setValueAtTime(0.0001, now);
-      envelope.gain.exponentialRampToValueAtTime(0.082, now + 0.035);
-      envelope.gain.exponentialRampToValueAtTime(0.0001, now + 0.95);
-      oscillator.connect(envelope).connect(filter);
-      oscillator.start(now);
-      oscillator.stop(now + 1);
-
-      if (step % 4 === 0) {
-        const pulseOscillator = context.createOscillator();
-        const pulseGain = context.createGain();
-        pulseOscillator.type = "sine";
-        pulseOscillator.frequency.setValueAtTime(72, now);
-        pulseOscillator.frequency.exponentialRampToValueAtTime(46, now + 0.42);
-        pulseGain.gain.setValueAtTime(0.07, now);
-        pulseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
-        pulseOscillator.connect(pulseGain).connect(master);
-        pulseOscillator.start(now);
-        pulseOscillator.stop(now + 0.48);
-      }
-      step += 1;
-    };
-
-    scheduleNote();
-    const timer = window.setInterval(scheduleNote, 430);
-    contextRef.current = context;
-    nodesRef.current = { master, pads, timer };
-    if (context.state === "suspended") void context.resume();
-    setEnabled(true);
-    sessionStorage.setItem("aahana-sound", "on");
-  };
-
-  const pulse = () => {
-    const context = contextRef.current;
-    if (!context) return;
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-    oscillator.frequency.value = 420;
-    oscillator.type = "sine";
-    gain.gain.setValueAtTime(0.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.09, context.currentTime + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.16);
-    const destination = nodesRef.current?.master || context.destination;
-    oscillator.connect(gain).connect(destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.18);
-  };
-
-  useEffect(() => {
-    const onVisibility = () => {
-      const context = contextRef.current;
-      if (!context) return;
-      if (document.hidden) void context.suspend();
-      else if (sessionStorage.getItem("aahana-sound") === "on") void context.resume();
-    };
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => {
-      document.removeEventListener("visibilitychange", onVisibility);
-      const nodes = nodesRef.current;
-      if (nodes) window.clearInterval(nodes.timer);
-      const context = contextRef.current;
-      if (context) void context.close();
-    };
-  }, []);
-
-  return { enabled, start, stop, pulse };
-}
 
 export function IntelligenceCore({ compact = false }: { compact?: boolean }) {
   return (
@@ -306,24 +153,6 @@ function NeuralTrace() {
   );
 }
 
-function EntryGate({ onEnter }: { onEnter: (sound: boolean) => void }) {
-  return (
-    <div className="entry-gate" role="dialog" aria-modal="true" aria-labelledby="entry-title">
-      <div className="entry-noise" />
-      <div className="entry-core"><IntelligenceCore compact /></div>
-      <p className="eyebrow">INTELLIGENT SYSTEMS UNIVERSE / 2027</p>
-      <h1 id="entry-title">Choose your signal.</h1>
-      <p className="entry-copy">Enter with a cinematic generative synth score—layered ambient pads, neural pulses and a live arpeggio composed in your browser.</p>
-      <div className="entry-audio-meter" aria-hidden="true"><span>AUDIO SCORE / READY</span><i /><i /><i /><i /><i /><i /></div>
-      <div className="entry-actions">
-        <button onClick={() => onEnter(true)}><Volume2 size={17} /> Enter with sound</button>
-        <button onClick={() => onEnter(false)}><VolumeX size={17} /> Continue silently</button>
-      </div>
-      <button className="skip-link-button" onClick={() => onEnter(false)}>Skip intro</button>
-    </div>
-  );
-}
-
 function CursorSignal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -342,20 +171,10 @@ function CursorSignal() {
 }
 
 export default function PortfolioExperience() {
-  const [entered, setEntered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const heroCoreRef = useRef<HTMLDivElement>(null);
-  const { enabled: soundEnabled, start: startSound, stop: stopSound, pulse } = useAmbientSound();
-
-  useEffect(() => {
-    if (sessionStorage.getItem("aahana-entered-v2") === "yes") {
-      document.body.classList.add("system-entered");
-      queueMicrotask(() => setEntered(true));
-    }
-  }, []);
-
   useEffect(() => {
     const onScroll = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight;
@@ -410,17 +229,8 @@ export default function PortfolioExperience() {
 
   const highlighted = useMemo(() => selectedSkill ? skillMap[selectedSkill] || [] : [], [selectedSkill]);
 
-  const enter = (withSound: boolean) => {
-    if (withSound) startSound();
-    else sessionStorage.setItem("aahana-sound", "off");
-    setEntered(true);
-    sessionStorage.setItem("aahana-entered-v2", "yes");
-    document.body.classList.add("system-entered");
-  };
-
   return (
     <main className="site-shell">
-      {!entered && <EntryGate onEnter={enter} />}
       <CursorSignal />
       <a className="skip-to-work" href="#work">Skip to Work</a>
       <div className="scroll-orbit" aria-label={`Page progress ${Math.round(progress * 100)}%`}>
@@ -438,10 +248,6 @@ export default function PortfolioExperience() {
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
         </nav>
         <div className="nav-actions">
-          <span className={`sound-status ${soundEnabled ? "is-live" : ""}`} aria-live="polite"><i />{soundEnabled ? "SCORE LIVE" : "SCORE OFF"}</span>
-          <button className="icon-button" onClick={() => soundEnabled ? stopSound() : startSound()} aria-label={soundEnabled ? "Mute ambient sound" : "Enable ambient sound"} data-cursor={soundEnabled ? "MUTE" : "SOUND"}>
-            {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
-          </button>
           <button className="icon-button menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu">
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -456,16 +262,16 @@ export default function PortfolioExperience() {
         <div className="hero-copy">
           <p className="eyebrow"><span className="live-dot" /> INDIA / OPEN WORLDWIDE</p>
           <h1><span>Aahana</span><span>Ahir</span></h1>
-          <div className="hero-rule" />
+          <div className="hero-rule" /><div className="scroll-invitation" aria-hidden="true"><span>SCROLL TO TRANSFORM</span><i>↓</i></div>
           <p className="hero-role">COMPUTER SCIENCE ENGINEER <i>×</i> INTELLIGENT SYSTEMS</p>
           <p className="hero-statement">Engineering intelligent systems<br />that <em>explain</em> their reasoning.</p>
           <div className="hero-actions">
-            <a href="#work" className="signal-button" data-cursor="EXPLORE" onClick={pulse}>Enter the systems <ArrowDownRight size={18} /></a>
+            <a href="#work" className="signal-button" data-cursor="EXPLORE">Enter the systems <ArrowDownRight size={18} /></a>
             <a href="mailto:aahanaahir10@gmail.com" className="text-link">Start a conversation <ArrowUpRight size={16} /></a>
           </div>
         </div>
         <div ref={heroCoreRef} className="hero-core-wrap">
-          <IntelligenceCore />
+          <div className="hero-art-space" aria-hidden="true" />
           <div className="telemetry telemetry-a"><span>RETRIEVAL</span><b>READY</b></div>
           <div className="telemetry telemetry-b"><span>CONTROL</span><b>HUMAN</b></div>
           <div className="telemetry telemetry-c"><span>SYSTEM</span><b>AA—27</b></div>
@@ -526,7 +332,7 @@ export default function PortfolioExperience() {
                 data-glyph={language.glyph}
                 data-cursor="OPEN RÉSUMÉ"
                 key={language.code}
-                onClick={pulse}
+
               >
                 <span>LANG / {String(index + 1).padStart(2, "0")}</span>
                 <Languages size={16} />
@@ -570,7 +376,7 @@ export default function PortfolioExperience() {
             const dimmed = highlighted.length > 0 && !highlighted.includes(project.slug);
             const lit = highlighted.includes(project.slug);
             return (
-              <Link href={`/projects/${project.slug}`} key={project.slug} className={`project-row ${dimmed ? "is-dimmed" : ""} ${lit ? "is-lit" : ""}`} data-cursor="ENTER SYSTEM" onClick={pulse}>
+              <Link href={`/projects/${project.slug}`} key={project.slug} className={`project-row ${dimmed ? "is-dimmed" : ""} ${lit ? "is-lit" : ""}`} data-cursor="ENTER SYSTEM">
                 <span className="project-number">{project.number}</span>
                 <div className="project-name"><h3>{project.shortName}</h3><p>{project.title}</p></div>
                 <div className="project-meta"><span className={`status-dot ${project.statusTone}`} />{project.status}</div>
