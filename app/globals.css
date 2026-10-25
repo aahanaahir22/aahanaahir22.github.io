@@ -800,3 +800,10 @@ html { scroll-padding-top: 6rem; }
  .scroll-invitation { display:none; }
 }
 @media print { .motion-canvas, .motion-caption, .route-curtain { display:none !important; } }
+
+@media (max-width:720px) {
+ .nav-links { top:5.4rem; visibility:hidden; }
+ .nav-links.is-open { visibility:visible; }
+ .hero-statement br { display:initial; }
+ .hero-footer span:nth-child(even) { display:inline; }
+}
