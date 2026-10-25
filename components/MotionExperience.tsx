@@ -2,11 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { createSoftwareScene } from "./softwareScene";
 
 // One persistent, scroll-scrubbed sculpture. All motion is decorative: content
 // and native anchor navigation still work without canvas or JavaScript.
 export default function MotionExperience() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
   const curtainRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const pathname = usePathname();
@@ -27,113 +28,106 @@ export default function MotionExperience() {
       event.preventDefault();
       event.stopPropagation();
       if (curtain.dataset.active === "true") return;
+      curtain.style.background = url.pathname.includes("integratex") ? "#d9ff43" : url.pathname.includes("healthbridge") ? "#ff845e" : "#b7a0f5";
       curtain.dataset.active = "true";
       if (labelRef.current) labelRef.current.textContent = url.pathname.includes("projects") ? "ENTERING SYSTEM" : url.pathname.includes("resume") ? "LANGUAGE CONSTELLATION" : "RETURNING TO ORBIT";
-      timer = setTimeout(() => router.push(url.pathname + url.search + url.hash), 460);
+      timer = setTimeout(() => router.push(url.pathname + url.search + url.hash), 600);
       // A failed route must never leave the interface blocked.
-      fallback = setTimeout(() => { curtain.dataset.active = "false"; }, 2200);
+      fallback = setTimeout(() => { curtain.dataset.active = "false"; }, 2600);
     };
     document.addEventListener("click", click, true);
     return () => { document.removeEventListener("click", click, true); clearTimeout(timer); clearTimeout(fallback); };
   }, [pathname, router]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx) return;
+    const host = canvasRef.current;
+    if (!host) return;
+    let disposed = false;
+    let scene: ReturnType<typeof import("./chromeScene").createChromeScene> | undefined;
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const home = pathname === "/";
+    document.documentElement.classList.add("immersive-ready");
     document.documentElement.dataset.motionPage = home ? "home" : "detail";
-    let width = 0, height = 0, frame = 0, last = 0, scene = 0, pointer = 0;
-    let sections: HTMLElement[] = [];
-    let offsets: number[] = [];
+    let frame = 0, previous = 0, smoothHero = 0, pointerX = 0, pointerY = 0;
+    const hero = document.querySelector<HTMLElement>(".hero-scene");
+    const manifesto = document.querySelector<HTMLElement>(".manifesto-section");
+    const work = document.querySelector<HTMLElement>(".work-universe");
+    const track = document.querySelector<HTMLElement>(".project-index");
+    const words = Array.from(document.querySelectorAll<HTMLElement>(".manifesto-word > span"));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>(".project-row"));
+    const titleA = document.querySelector<HTMLElement>(".hero-copy h1 span:first-child");
+    const titleB = document.querySelector<HTMLElement>(".hero-copy h1 span:last-child");
+    const copy = document.querySelector<HTMLElement>(".hero-copy");
+    const refrain = document.querySelector<HTMLElement>(".hero-refrain");
+    const meter = document.querySelector<HTMLElement>(".sequence-meter b");
+    const neural = document.querySelector<HTMLElement>(".neural-stage");
+    const strip = document.querySelector<HTMLElement>(".kinetic-strip > div");
+    const count = document.querySelector<HTMLElement>(".gallery-count");
+    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".gallery-controls button"));
+    const entries = Array.from(document.querySelectorAll<HTMLElement>(".experience-entry"));
+    let heroTop=0,heroLength=1,manifestoTop=0,manifestoLength=1,workTop=0,workLength=1,trackTravel=0,neuralTop=0;
+    const clamp = (v:number) => Math.max(0,Math.min(1,v));
     const measure = () => {
-      width = innerWidth; height = innerHeight;
-      const dpr = Math.min(devicePixelRatio || 1, 1.5);
-      canvas.width = width * dpr; canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      sections = Array.from(document.querySelectorAll<HTMLElement>("main > section"));
-      offsets = sections.map(s => s.getBoundingClientRect().top + scrollY);
+      heroTop=hero?.offsetTop || 0; heroLength=Math.max(1,(hero?.offsetHeight || innerHeight)-innerHeight);
+      manifestoTop=manifesto?.offsetTop || 0;manifestoLength=Math.max(1,(manifesto?.offsetHeight || innerHeight)-innerHeight);
+      workTop=work?.offsetTop || 0;workLength=Math.max(1,(work?.offsetHeight || innerHeight)-innerHeight);
+      trackTravel=Math.max(0,(track?.scrollWidth || 0)-innerWidth+Math.min(innerWidth*.05,80)*2);
+      neuralTop=neural?neural.getBoundingClientRect().top+scrollY:0;
     };
-    const shapes = ["ORBIT", "SIGNAL", "NEURAL", "IDENTITY", "CONSTELLATION", "CAPABILITY", "SYSTEMS", "TIMELINE", "LEARNING", "EVIDENCE", "CONNECTION"];
-    const point = (i: number, shape: number, count: number): [number, number, number] => {
-      const t = i / count, a = i * 2.39996323, y = 1 - t * 2, r = Math.sqrt(1 - y * y);
-      switch (shape % 6) {
-        case 0: return [Math.cos(a) * r, y, Math.sin(a) * r];
-        case 1: { const angle = t * Math.PI * 12; return [Math.cos(angle) * .7, y * 1.25, Math.sin(angle) * .7]; }
-        case 2: return [(i % 7 - 3) / 3, (Math.floor(i / 7) % 7 - 3) / 3, (Math.floor(i / 49) - 2) / 3];
-        case 3: { const angle = t * Math.PI * 2; const twist = a; return [(1 + .28 * Math.cos(twist)) * Math.cos(angle), (1 + .28 * Math.cos(twist)) * Math.sin(angle), .28 * Math.sin(twist)]; }
-        case 4: return [Math.cos(a) * (t * .85 + .2), Math.sin(a) * (t * .85 + .2), Math.sin(t * Math.PI * 6) * .6];
-        default: return [Math.sin(t * Math.PI * 8) * .85, y, Math.cos(t * Math.PI * 8) * Math.sin(a)];
-      }
+    import("./chromeScene").then(({createChromeScene})=>{
+      if(disposed)return;
+      try { scene=createChromeScene(host);host.dataset.webgl="ready";wake(); }
+      catch { scene=createSoftwareScene(host);host.dataset.webgl="ready";host.dataset.renderer="canvas";wake(); }
+    }).catch(()=>{if(!disposed){scene=createSoftwareScene(host);host.dataset.webgl="ready";host.dataset.renderer="canvas";wake();}});
+    const render = (time:number) => {
+      if(disposed||document.hidden){frame=0;return;}
+      if(time-previous<30&&!media.matches){frame=requestAnimationFrame(render);return;}
+      previous=time;
+      const reduced=media.matches;
+      const hp=reduced?0:home?clamp((scrollY-heroTop)/heroLength):clamp(scrollY/innerHeight);
+      smoothHero=reduced?0:smoothHero+(hp-smoothHero)*.16;
+      const p=smoothHero;
+      host.style.opacity=home?String(scrollY<heroTop+heroLength+innerHeight?1-clamp((scrollY-heroLength)/innerHeight):0):String(1-clamp(scrollY/innerHeight));
+      if(scene&&Number(host.style.opacity)>.005)scene.update(p,time*.001,pointerX,pointerY,reduced,!home);
+      host.style.setProperty("--explode",String(p));
+      if(titleA)titleA.style.opacity=String(1-clamp((p-.2)*3));
+      if(titleB)titleB.style.opacity=String(1-clamp((p-.2)*3));
+      if(titleA)titleA.style.transform=`translate3d(${-p*110}%,${-p*22}vh,0) rotate(${-p*9}deg)`;
+      if(titleB)titleB.style.transform=`translate3d(${p*115}%,${p*12}vh,0) rotate(${p*9}deg)`;
+      if(copy)copy.style.setProperty("--copy-fade",String(1-clamp(p*3)));
+      if(refrain){refrain.style.opacity=String(clamp((p-.28)*4)*(1-clamp((p-.86)*7)));refrain.style.transform=`translate(-50%,-50%) scale(${.7+p*.35})`;}
+      if(meter)meter.textContent=`${String(Math.round(p*99)+1).padStart(3,"0")} / 100`;
+      if(hero)hero.style.setProperty("--sequence",String(p));
+      const mp=reduced?1:clamp((scrollY-manifestoTop+innerHeight*.2)/(manifestoLength+innerHeight*.1));
+      words.forEach((word,i)=>{const reveal=clamp(mp*1.4-i/words.length);word.style.opacity=String(reduced?1:.15+clamp(reveal*5)*.85);word.style.transform=`translateY(${reduced?0:(1-clamp(reveal*5))*18}px)`;});
+      if(manifesto)manifesto.style.setProperty("--read-progress",String(mp));
+      const wp=reduced?0:clamp((scrollY-workTop)/workLength);
+      if(track)track.style.transform=reduced?"none":`translate3d(${-wp*trackTravel}px,0,0)`;
+      const active=Math.round(wp*(cards.length-1));
+      if(count)count.textContent=`${String(active+1).padStart(2,"0")} / 04`;
+      cards.forEach((card,i)=>{card.style.setProperty("--card-turn",`${reduced?0:(i-wp*3)*-9}deg`);card.dataset.active=String(i===active);});
+      buttons.forEach((button,i)=>button.setAttribute("aria-pressed",String(i===active)));
+      if(strip)strip.style.transform=`translateX(${reduced?0:-(scrollY*.14)%700}px)`;
+      if(neural&&!reduced){const n=clamp((scrollY-neuralTop+innerHeight)/innerHeight);neural.style.transform=`perspective(1200px) rotateY(${(n-.5)*32}deg) rotateX(${(n-.5)*-18}deg) scale(${.85+n*.15})`;}
+      entries.forEach((entry,i)=>{if(reduced){entry.style.transform="none";return;}const rect=entry.getBoundingClientRect();const e=clamp((innerHeight-rect.top)/innerHeight);entry.style.transform=`translateX(${(1-e)*(i%2?1:-1)*80}px) rotate(${(1-e)*(i%2?2:-2)}deg)`;});
+      const caption=document.getElementById("motion-chapter");if(caption)caption.textContent=home?(hp<1?"01 / DECONSTRUCT":scrollY<workTop?"02 / DISCOVER":"03 / EXPLORE"):"SYSTEM / OPEN";
+      if(!reduced)frame=requestAnimationFrame(render);else frame=0;
     };
-    const render = (now: number) => {
-      if (document.hidden) { frame = 0; return; }
-      if (now - last < 30 && !media.matches) { frame = requestAnimationFrame(render); return; }
-      last = now;
-      const scroll = scrollY;
-      let index = 0;
-      for (let i = 0; i < offsets.length; i++) if (scroll + height * .38 >= offsets[i]) index = i;
-      const start = offsets[index] || 0, end = offsets[index + 1] || start + height;
-      const within = Math.max(0, Math.min(1, (scroll + height * .38 - start) / Math.max(end - start, 1)));
-      const target = media.matches ? 0 : index + Math.max(0, (within - .45) / .55);
-      scene += (target - scene) * .1;
-      if (media.matches) scene = 0;
-      const chapter = shapes[Math.min(index, shapes.length - 1)];
-      const caption = document.getElementById("motion-chapter");
-      if (caption) caption.textContent = `${String(index + 1).padStart(2, "0")} / ${home ? chapter : "SYSTEM TRACE"}`;
-      const hue = home ? 155 + Math.sin(scene * .85) * 48 : 210;
-      canvas.style.opacity = home ? (index === 0 ? "1" : ".32") : ".22";
-      ctx.clearRect(0, 0, width, height);
-      const small = width < 760;
-      const cx = width * (small ? .7 : .74), cy = height * (small ? .36 : .5);
-      const size = Math.min(width * (small ? .42 : .25), height * .36);
-      const turn = media.matches ? .25 : scroll * .0007 + now * .000055 + pointer;
-      const tilt = .24 + Math.sin(scene) * .25;
-      const count = small ? 180 : 300;
-      const projected: {x:number;y:number;z:number}[] = [];
-      const base = Math.floor(scene), mix = scene - base;
-      for (let i = 0; i < count; i++) {
-        const a = point(i, base, count), b = point(i, base + 1, count);
-        const x = a[0] + (b[0] - a[0]) * mix, y = a[1] + (b[1] - a[1]) * mix, z = a[2] + (b[2] - a[2]) * mix;
-        const rx = x * Math.cos(turn) + z * Math.sin(turn), rz = z * Math.cos(turn) - x * Math.sin(turn);
-        const ry = y * Math.cos(tilt) - rz * Math.sin(tilt), depth = y * Math.sin(tilt) + rz * Math.cos(tilt);
-        const perspective = 3 / (3 - depth * .5);
-        projected.push({x:cx + rx * size * perspective, y:cy + ry * size * perspective, z:depth});
-      }
-      const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, size * 1.5);
-      glow.addColorStop(0, `hsla(${hue},80%,55%,.075)`); glow.addColorStop(1, `hsla(${hue},80%,55%,0)`);
-      ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
-      projected.forEach((p, i) => {
-        for (let step = 1; step <= 2; step++) {
-          const q = projected[(i + (base % 6 === 2 ? step : step * 13)) % count];
-          const distance = Math.hypot(p.x - q.x, p.y - q.y);
-          if (distance < size * .31) {
-            ctx.strokeStyle = `hsla(${hue},65%,72%,${Math.max(0, .18 - distance / size * .45)})`;
-            ctx.lineWidth = .65; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
-          }
-        }
-        ctx.fillStyle = `hsla(${hue},75%,${70 + p.z * 12}%,${.45 + p.z * .18})`;
-        ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(.7, 1.3 + p.z * .55), 0, Math.PI * 2); ctx.fill();
-      });
-      // Orbital contour follows scroll rather than an independent video loop.
-      ctx.strokeStyle = `hsla(${hue},70%,74%,.22)`; ctx.lineWidth = .7;
-      ctx.beginPath(); ctx.ellipse(cx, cy, size * 1.25, size * (.22 + .12 * Math.sin(scene)), turn * .4, 0, Math.PI * 2); ctx.stroke();
-      if (!media.matches) frame = requestAnimationFrame(render); else frame = 0;
-    };
-    const wake = () => { if (!frame) frame = requestAnimationFrame(render); };
-    const resize = () => { measure(); wake(); };
-    const move = (event: PointerEvent) => { if (!media.matches) pointer = (event.clientX / width - .5) * .18; };
-    measure(); wake();
-    const observer = new ResizeObserver(measure); observer.observe(document.body);
-    window.addEventListener("resize", resize); window.addEventListener("scroll", wake, {passive:true});
-    window.addEventListener("pointermove", move, {passive:true}); document.addEventListener("visibilitychange", wake); media.addEventListener("change", wake);
-    return () => { cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener("resize", resize); window.removeEventListener("scroll", wake); window.removeEventListener("pointermove", move); document.removeEventListener("visibilitychange", wake); media.removeEventListener("change", wake); };
+    const wake=()=>{if(!frame&&!disposed)frame=requestAnimationFrame(render);};
+    const resize=()=>{measure();wake();};
+    const move=(event:PointerEvent)=>{pointerX=event.clientX/innerWidth-.5;pointerY=event.clientY/innerHeight-.5;};
+    // Move the pinned gallery to keyboard-focused cards as well as on scroll.
+    const focus=(event:FocusEvent)=>{const i=cards.indexOf(event.target as HTMLElement);if(i>=0&&!media.matches)window.scrollTo({top:workTop+workLength*i/Math.max(1,cards.length-1),behavior:"instant"});};
+    measure();wake();
+    const observer=new ResizeObserver(resize);observer.observe(document.body);
+    addEventListener("resize",resize);addEventListener("scroll",wake,{passive:true});addEventListener("pointermove",move,{passive:true});
+    document.addEventListener("visibilitychange",wake);track?.addEventListener("focusin",focus);media.addEventListener("change",resize);
+    return()=>{disposed=true;cancelAnimationFrame(frame);scene?.dispose();observer.disconnect();removeEventListener("resize",resize);removeEventListener("scroll",wake);removeEventListener("pointermove",move);document.removeEventListener("visibilitychange",wake);track?.removeEventListener("focusin",focus);media.removeEventListener("change",resize);document.documentElement.classList.remove("immersive-ready");};
   }, [pathname]);
 
   return <>
-    <canvas ref={canvasRef} className="motion-canvas" aria-hidden="true" />
+    <div ref={canvasRef} className="webgl-stage" aria-hidden="true"><div className="sculpture-fallback"><i/><i/><i/></div></div>
     <div className="motion-caption" aria-hidden="true"><span className="motion-caption-dot" /><span id="motion-chapter">01 / ORBIT</span><span>SCROLL-DRIVEN EXPLORATION</span></div>
-    <div className="route-curtain" ref={curtainRef} data-active="false" aria-hidden="true"><div className="curtain-grid" /><b>AA<span>↗</span></b><span ref={labelRef}>ENTERING SYSTEM</span></div>
+    <div className="route-curtain" ref={curtainRef} data-active="false" aria-hidden="true"><div className="curtain-grid" /><div className="curtain-slices"><i/><i/><i/><i/><i/></div><b>AA<span>↗</span></b><span ref={labelRef}>ENTERING SYSTEM</span></div>
   </>;
 }

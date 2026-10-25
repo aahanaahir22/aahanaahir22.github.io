@@ -207,7 +207,7 @@ export default function PortfolioExperience() {
   }, []);
 
   useEffect(() => {
-    const targets = document.querySelectorAll<HTMLElement>(".manifesto-section, .neural-trace, .section-heading, .scan-panel, .skill-row, .project-row, .experience-entry, .education-grid, .credential-row");
+    const targets = document.querySelectorAll<HTMLElement>(".section-heading, .scan-panel, .skill-row, .education-grid, .credential-row");
     if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       targets.forEach((target) => target.classList.add("reveal-target", "is-visible"));
       return;
@@ -255,6 +255,8 @@ export default function PortfolioExperience() {
       </header>
 
       <section id="top" className="hero-scene">
+        <div className="hero-sticky">
+        <div className="hero-crosshair" aria-hidden="true">✳</div>
         <div className="hero-grid" />
         <div className="data-rain" aria-hidden="true">
           {["0101", "RAG", "∇L", "VECTOR", "AI", "TOKEN", "HITL", "PY", "MODEL", "API"].map((token, index) => <span key={token} style={{ "--stream": index } as CSSProperties}>{token}</span>)}
@@ -277,14 +279,19 @@ export default function PortfolioExperience() {
           <div className="telemetry telemetry-c"><span>SYSTEM</span><b>AA—27</b></div>
         </div>
         <div className="hero-footer"><span>PYTHON</span><span>AI / ML</span><span>BACKEND</span><span>CLOUD</span></div>
+        <div className="hero-refrain" aria-hidden="true"><span>INTELLIGENT</span><span>SYSTEMS.</span></div>
+        <div className="sequence-meter" aria-hidden="true"><span>SCROLL TO DECONSTRUCT</span><i /><b>001 / 100</b></div>
+        </div>
       </section>
 
-      <section className="manifesto-section" aria-label="Portfolio focus">
+      <section className="manifesto-section" aria-label="Portfolio focus"><div className="manifesto-sticky">
+        <span className="manifesto-star" aria-hidden="true">✳</span>
         <p className="section-code">SYS.00 / OPERATING PRINCIPLE</p>
-        <p className="manifesto">Software earns trust when the path from <span>signal</span> to <span>decision</span> stays visible.</p>
-        <div className="principle-line"><span>01 / UNDERSTAND</span><span>02 / GROUND</span><span>03 / BUILD</span><span>04 / VERIFY</span></div>
+        <p className="manifesto">{"Software earns trust when the path from signal to decision stays visible.".split(" ").map((word, i) => <span className="manifesto-word" key={i}><span>{word}</span>{" "}</span>)}</p>
+        <div className="principle-line"><span>01 / UNDERSTAND</span><span>02 / GROUND</span><span>03 / BUILD</span><span>04 / VERIFY</span></div></div>
       </section>
 
+      <div className="kinetic-strip" aria-hidden="true"><div>PYTHON / AI / ML / BACKEND / CLOUD / PYTHON / AI / ML / BACKEND / CLOUD /</div></div>
       <NeuralTrace />
 
       <section id="profile" className="profile-scene section-pad">
@@ -366,17 +373,18 @@ export default function PortfolioExperience() {
         </div>
       </section>
 
-      <section id="work" className="work-universe section-pad">
+      <section id="work" className="work-universe section-pad"><div className="work-sticky">
         <div className="work-heading">
           <div><p className="section-code">SYS.03 / FEATURED WORK</p><h2>Four systems.<br /><em>One philosophy.</em></h2></div>
           <p>Projects are presented with honest status, architecture, evidence boundaries and next steps—not inflated impact.</p>
         </div>
-        <div className="project-index">
-          {projects.map((project) => {
+        <div className="gallery-viewport"><div className="project-index">
+          {projects.map((project, projectIndex) => {
             const dimmed = highlighted.length > 0 && !highlighted.includes(project.slug);
             const lit = highlighted.includes(project.slug);
             return (
-              <Link href={`/projects/${project.slug}`} key={project.slug} className={`project-row ${dimmed ? "is-dimmed" : ""} ${lit ? "is-lit" : ""}`} data-cursor="ENTER SYSTEM">
+              <Link href={`/projects/${project.slug}`} key={project.slug} className={`project-row project-card-${projectIndex} ${dimmed ? "is-dimmed" : ""} ${lit ? "is-lit" : ""}`} data-cursor="ENTER SYSTEM">
+                <div className="project-art" aria-hidden="true"><span className="art-serial">{project.number}</span><div className="project-object">{Array.from({length:8},(_,i)=><i key={i} style={{"--i":i} as CSSProperties}/>)}</div><span className="art-label">{project.stack[0]} ↗ {project.stack[1]}</span></div>
                 <span className="project-number">{project.number}</span>
                 <div className="project-name"><h3>{project.shortName}</h3><p>{project.title}</p></div>
                 <div className="project-meta"><span className={`status-dot ${project.statusTone}`} />{project.status}</div>
@@ -386,8 +394,10 @@ export default function PortfolioExperience() {
             );
           })}
         </div>
+        </div>
+        <div className="gallery-controls"><span>SCROLL TO EXPLORE →</span><div>{projects.map((project,i)=><button key={project.slug} aria-label={`Show ${project.shortName}`} onClick={()=>{const section=document.getElementById("work");const card=document.querySelectorAll<HTMLElement>(".project-row")[i];if(!section||!card)return;if(document.documentElement.classList.contains("immersive-ready")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){window.scrollTo({top:section.offsetTop+(section.offsetHeight-innerHeight)*(i/(projects.length-1)),behavior:"smooth"});}else card.scrollIntoView({behavior:"smooth",block:"center"});}}>{String(i+1).padStart(2,"0")}</button>)}</div><span className="gallery-count">01 / 04</span></div>
         {selectedSkill && <p className="skill-signal">ACTIVE SIGNAL: {selectedSkill.toUpperCase()} → {highlighted.length || "NO DIRECT PROJECT MAP"}</p>}
-      </section>
+      </div></section>
 
       <section id="experience" className="experience-section section-pad">
         <div className="section-heading compact-heading">
