@@ -74,7 +74,7 @@ export default function MotionExperience() {
       trackTravel=Math.max(0,(track?.scrollWidth || 0)-innerWidth+Math.min(innerWidth*.05,80)*2);
       neuralTop=neural?neural.getBoundingClientRect().top+scrollY:0;
     };
-    import("./chromeScene").then(({createChromeScene})=>{
+    if (!home) import("./chromeScene").then(({createChromeScene})=>{
       if(disposed)return;
       try { scene=createChromeScene(host);host.dataset.webgl="ready";wake(); }
       catch { scene=createSoftwareScene(host);host.dataset.webgl="ready";host.dataset.renderer="canvas";wake(); }
@@ -98,6 +98,9 @@ export default function MotionExperience() {
       if(refrain){refrain.style.opacity=String(clamp((p-.28)*4)*(1-clamp((p-.86)*7)));refrain.style.transform=`translate(-50%,-50%) scale(${.7+p*.35})`;}
       if(meter)meter.textContent=`${String(Math.round(p*99)+1).padStart(3,"0")} / 100`;
       if(hero)hero.style.setProperty("--sequence",String(p));
+      const dream=document.querySelector<HTMLElement>(".idea-observatory");
+      if(dream){dream.style.transform=`translateY(${-p*12}vh) scale(${1+p*p*5})`;dream.style.opacity=String(1-clamp((p-.7)*4));}
+      const kicker=document.querySelector<HTMLElement>(".dream-kicker");if(kicker)kicker.style.opacity=String(1-clamp(p*4));
       const mp=reduced?1:clamp((scrollY-manifestoTop+innerHeight*.2)/(manifestoLength+innerHeight*.1));
       words.forEach((word,i)=>{const reveal=clamp(mp*1.4-i/words.length);word.style.opacity=String(reduced?1:.15+clamp(reveal*5)*.85);word.style.transform=`translateY(${reduced?0:(1-clamp(reveal*5))*18}px)`;});
       if(manifesto)manifesto.style.setProperty("--read-progress",String(mp));
@@ -110,7 +113,7 @@ export default function MotionExperience() {
       if(strip)strip.style.transform=`translateX(${reduced?0:-(scrollY*.14)%700}px)`;
       if(neural&&!reduced){const n=clamp((scrollY-neuralTop+innerHeight)/innerHeight);neural.style.transform=`perspective(1200px) rotateY(${(n-.5)*32}deg) rotateX(${(n-.5)*-18}deg) scale(${.85+n*.15})`;}
       entries.forEach((entry,i)=>{if(reduced){entry.style.transform="none";return;}const rect=entry.getBoundingClientRect();const e=clamp((innerHeight-rect.top)/innerHeight);entry.style.transform=`translateX(${(1-e)*(i%2?1:-1)*80}px) rotate(${(1-e)*(i%2?2:-2)}deg)`;});
-      const caption=document.getElementById("motion-chapter");if(caption)caption.textContent=home?(hp<1?"01 / DECONSTRUCT":scrollY<workTop?"02 / DISCOVER":"03 / EXPLORE"):"SYSTEM / OPEN";
+      const caption=document.getElementById("motion-chapter");if(caption)caption.textContent=home?(hp<1?"01 / IMAGINE":scrollY<workTop?"02 / DISCOVER":"03 / EXPLORE"):"SYSTEM / OPEN";
       if(!reduced)frame=requestAnimationFrame(render);else frame=0;
     };
     const wake=()=>{if(!frame&&!disposed)frame=requestAnimationFrame(render);};

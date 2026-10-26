@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./immersive.css";
+import "./observatory.css";
 import MotionExperience from "@/components/MotionExperience";
 
 export const metadata: Metadata = {

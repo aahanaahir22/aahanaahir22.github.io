@@ -1,0 +1,40 @@
+/* THE IDEA OBSERVATORY — an original illustrated world for Aahana. */
+:root{--cyan:#c5b3e8;--green:#c5b3e8;--paper:#f0ead8}
+html[data-motion-page="home"] .webgl-stage{display:none}
+body{background:#242620}
+.system-nav{background:#e9e3cfed;border-bottom:1px solid #292b2726;color:#292b27;backdrop-filter:blur(18px)}
+.system-mark b,.nav-links a,.system-mark span{color:#292b27}.system-mark i{background:#292b27}
+.hero-scene{background:#e9e3cf;border-radius:0 0 2rem 2rem}
+.hero-sticky{min-height:750px;background:radial-gradient(ellipse at 50% 65%,#ded2e9 0,transparent 52%);isolation:isolate}
+.hero-sticky:after{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' opacity='.2' filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");opacity:.12;pointer-events:none;z-index:9}
+.dream-kicker{position:absolute;top:7rem;width:100%;text-align:center;font:10px ui-monospace,monospace;letter-spacing:.24em;color:#515447;z-index:4}
+.hero-copy h1{top:9.6rem;left:0;right:0;text-align:center;display:flex;justify-content:center;gap:.22em;font:400 clamp(5rem,12.3vw,13rem)/.9 Georgia,'Times New Roman',serif;letter-spacing:-.075em;color:#292b27;z-index:4;text-transform:uppercase;white-space:nowrap}
+.hero-copy h1 span:last-child{margin:0;color:#292b27}
+.hero-copy>.eyebrow{top:auto;bottom:10rem;left:4vw;color:#4d5144;font-size:.55rem;max-width:200px}
+.hero-role{right:4vw;bottom:9rem;width:230px;color:#4d5144;font-size:.55rem;line-height:1.8}
+.hero-statement{right:4vw;bottom:5.6rem;width:230px;font:1rem/1.5 Georgia,serif;color:#292b27}
+.hero-statement em{color:#626b43}
+.hero-actions{right:4vw;bottom:1.4rem;gap:.7rem;flex-direction:column;align-items:flex-end}
+.hero-actions .signal-button{background:#292b27;color:#f0ead8;border-color:#292b27}
+.hero-actions .text-link{color:#292b27}
+.hero-footer{color:#4d5144;width:28vw;bottom:1.5rem}
+.hero-crosshair,.data-rain{display:none}
+.sequence-meter{color:#292b27;bottom:5rem;right:auto;width:21vw;align-items:flex-start;flex-wrap:wrap;font-size:.48rem;gap:.7rem}
+.sequence-meter i{background:linear-gradient(90deg,#292b27 calc(var(--sequence,0)*100%),#292b2725 0);flex-basis:100%}
+.idea-observatory{position:absolute;inset:0;transform-origin:50% 68%;will-change:transform,opacity;pointer-events:none;z-index:2}
+.observatory-art{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(95vw,1300px);height:72%;overflow:visible}
+.floating-idea{animation:idea-float 6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.idea-two{animation-delay:-2s}.idea-three{animation-delay:-4s}
+.portal-stars{animation:portal-breathe 7s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.dream-note{position:absolute;top:47%;font:11px/1.7 ui-monospace,monospace;color:#515447}.dream-note em{font:italic 16px/1.8 Georgia,serif}.note-left{left:6vw;transform:rotate(-7deg)}.note-right{right:5vw;transform:rotate(6deg)}
+.dream-orbits{position:absolute;left:50%;top:65%;width:60vw;height:60vw;transform:translate(-50%,-50%)}.dream-orbits i{position:absolute;inset:0;border:1px solid #292b2714;border-radius:50%}.dream-orbits i:nth-child(2){inset:8%}.dream-orbits i:nth-child(3){inset:16%}
+.hero-refrain{font:italic 400 10vw/.95 Georgia,serif;color:#292b27;z-index:5;letter-spacing:-.065em;text-shadow:0 2px 30px #e9e3cf}.hero-refrain span:last-child{color:#545e3c}
+.manifesto-section{background:#b8bd8b;color:#292b27;border-radius:2rem 2rem 0 0}.manifesto{font:400 clamp(3rem,6.8vw,7rem)/1.1 Georgia,serif;letter-spacing:-.05em;color:#292b27}.manifesto-star{color:#6f7947;opacity:.2}
+.kinetic-strip{background:#c4b6dc;color:#292b27}.kinetic-strip>div{font-family:Georgia,serif;font-weight:400}
+.neural-trace,.skills-section{background:#292b27}.profile-scene{background:#eee8d8}.language-universe{background:#c4b6dc}.work-universe{background:#e9e3cf;color:#292b27}.work-heading .section-code,.work-heading>p{color:#636555}.work-heading h2{color:#292b27}.work-heading h2 em{color:#657048}.gallery-controls button{color:#292b27;border-color:#292b2755}.gallery-controls button[aria-pressed="true"]{background:#292b27;color:#eee8d8}.gallery-count{color:#292b27}
+.section-heading h2,.profile-scene .section-heading h2,.language-heading h2,.work-heading h2,.neural-copy h2{font-family:Georgia,serif;font-weight:400;letter-spacing:-.055em}
+.project-row{border-radius:90px 90px 12px 12px;background:#292b27}.project-art{border-bottom:1px solid #292b2755;background:#c4b6dc}.project-card-1 .project-art{background:#b8bd8b}.project-card-2 .project-art{background:#d7b1a2}.project-card-3 .project-art{background:#adc1c2}
+.experience-section{background:#c4b6dc}.education-section{background:#d7b1a2}.motion-caption{display:none}.route-curtain{border-radius:50% 50% 0 0}.curtain-grid{opacity:.1}
+@keyframes idea-float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-18px) rotate(5deg)}}
+@keyframes portal-breathe{0%,100%{transform:scale(.94);opacity:.5}50%{transform:scale(1.05);opacity:1}}
+@media(max-width:700px){.hero-sticky{min-height:740px}.dream-kicker{top:6.5rem;font-size:8px}.hero-copy h1{top:9rem;font-size:13vw;gap:.18em}.observatory-art{width:150vw;height:62%;bottom:10%}.dream-note{top:33%;font-size:8px}.dream-note em{font-size:12px}.note-left{left:5vw}.note-right{right:5vw}.hero-copy>.eyebrow{bottom:9rem;max-width:none}.hero-role{bottom:6.9rem;left:4vw;width:90%;font-size:.47rem}.hero-statement{bottom:4rem;left:4vw;width:52%;font-size:.85rem}.hero-actions{bottom:3.6rem;right:4vw;width:40%;gap:.7rem}.hero-actions .signal-button{font-size:.48rem;padding:.65rem}.hero-actions .text-link{font-size:.48rem}.hero-footer{bottom:1.2rem;width:80%}.sequence-meter{bottom:11rem;width:32vw}.hero-refrain{font-size:13vw}.dream-orbits{width:110vw;height:110vw}.project-row{border-radius:55px 55px 12px 12px}}
+@media(prefers-reduced-motion:reduce){.floating-idea,.portal-stars{animation:none}.idea-observatory{transform:none!important;opacity:1!important}}

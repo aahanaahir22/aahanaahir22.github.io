@@ -77,7 +77,7 @@ const sharedProjects = {
     repositoryUrl: "https://github.com/aahanaahir22/opsassist-ai",
     demoUrl: "https://aahanaahir22.github.io/opsassist-ai/",
   },
-  integratex: { name: "IntegrateX", stack: ["Python", "FastAPI", "Redis", "Celery", "RAG"] },
+  integratex: { name: "IntegrateX", repositoryUrl: "https://github.com/aahanaahir22/integratex", demoUrl: "https://aahanaahir22.github.io/integratex/", stack: ["Python", "FastAPI", "Redis", "Celery", "RAG"] },
   healthbridge: { name: "HealthBridge", stack: ["HTML", "CSS", "JavaScript", "Responsive UI"] },
   prevention: { name: "Suicide Prevention Microservice", stack: ["Go", "Kafka", "Python", "BERT", "Redis"] },
 };
@@ -113,7 +113,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     ],
     projects: [
       { ...sharedProjects.opsassist, title: "Evidence-Backed Incident Diagnosis & Resolution", status: "Live demo · Active development", summary: "A deployed incident-intelligence demonstration with a FastAPI backend, PostgreSQL, anomaly analysis, cited runbook retrieval and approval-gated synthetic remediation." },
-      { ...sharedProjects.integratex, title: "AI-Powered API Integration & Workflow Automation", status: "Active development", summary: "A natural-language-to-workflow system designed around typed API steps, validation, idempotency, retries and observable execution." },
+      { ...sharedProjects.integratex, title: "AI-Powered API Integration & Workflow Automation", status: "Completed · Live demo", summary: "A natural-language-to-workflow system designed around typed API steps, validation, idempotency, retries and observable execution." },
       { ...sharedProjects.healthbridge, title: "Responsive Healthcare Discovery Prototype", status: "Completed prototype", summary: "A mobile-first interface joining doctor discovery, appointment booking, medicine flows and representative administrative views." },
       { ...sharedProjects.prevention, title: "Privacy-Aware Ethical Research Prototype", status: "Research prototype", summary: "A bounded research system exploring anonymized streams, BERT-based classification and mandatory human-review safeguards; not a clinical tool." },
     ],
@@ -151,7 +151,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     ],
     projects: [
       { ...sharedProjects.opsassist, title: "प्रमाण-आधारित घटना निदान एवं समाधान", status: "लाइव डेमो · सक्रिय विकास", summary: "FastAPI backend, PostgreSQL, anomaly analysis, cited runbook retrieval और approval-gated synthetic remediation वाला deployed incident-intelligence demonstration।" },
-      { ...sharedProjects.integratex, title: "AI-संचालित API Integration एवं Workflow Automation", status: "सक्रिय विकास", summary: "Typed API steps, validation, idempotency, retries और observable execution पर आधारित natural-language-to-workflow system।" },
+      { ...sharedProjects.integratex, title: "AI-संचालित API Integration एवं Workflow Automation", status: "पूर्ण · लाइव डेमो", summary: "Typed API steps, validation, idempotency, retries और observable execution पर आधारित natural-language-to-workflow system।" },
       { ...sharedProjects.healthbridge, title: "Responsive Healthcare Discovery Prototype", status: "पूर्ण प्रोटोटाइप", summary: "Doctor discovery, appointment booking, medicine flows और representative administrative views को जोड़ने वाला mobile-first interface।" },
       { ...sharedProjects.prevention, title: "गोपनीयता-सचेत नैतिक शोध प्रोटोटाइप", status: "शोध प्रोटोटाइप", summary: "Anonymized streams, BERT classification और अनिवार्य human review पर केंद्रित सीमित शोध सिस्टम; यह clinical tool नहीं है।" },
     ],
@@ -189,7 +189,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     ],
     projects: [
       { ...sharedProjects.opsassist, title: "Evidenzbasierte Störungsdiagnose und -behebung", status: "Live-Demo · Aktive Entwicklung", summary: "Eine bereitgestellte Incident-Intelligence-Demo mit FastAPI, PostgreSQL, Anomalieanalyse, zitierter Runbook-Suche und freigabegesteuerter synthetischer Behebung." },
-      { ...sharedProjects.integratex, title: "KI-gestützte API-Integration und Workflow-Automatisierung", status: "Aktive Entwicklung", summary: "Ein Natural-Language-to-Workflow-System mit typisierten API-Schritten, Validierung, Idempotenz, Wiederholungen und beobachtbarer Ausführung." },
+      { ...sharedProjects.integratex, title: "KI-gestützte API-Integration und Workflow-Automatisierung", status: "Abgeschlossen · Live-Demo", summary: "Ein Natural-Language-to-Workflow-System mit typisierten API-Schritten, Validierung, Idempotenz, Wiederholungen und beobachtbarer Ausführung." },
       { ...sharedProjects.healthbridge, title: "Responsiver Healthcare-Discovery-Prototyp", status: "Abgeschlossener Prototyp", summary: "Eine Mobile-First-Oberfläche für Arztsuche, Terminbuchung, Medikamentenabläufe und repräsentative Verwaltungsansichten." },
       { ...sharedProjects.prevention, title: "Datenschutzbewusster ethischer Forschungsprototyp", status: "Forschungsprototyp", summary: "Ein begrenztes Forschungssystem zu anonymisierten Datenströmen, BERT-Klassifikation und verpflichtender menschlicher Prüfung; kein klinisches Werkzeug." },
     ],
@@ -227,7 +227,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     ],
     projects: [
       { ...sharedProjects.opsassist, title: "Diagnóstico y resolución de incidentes con evidencia", status: "Demo en vivo · Desarrollo activo", summary: "Demostración desplegada de inteligencia de incidentes con FastAPI, PostgreSQL, análisis de anomalías, recuperación de runbooks citados y remediación sintética con aprobación." },
-      { ...sharedProjects.integratex, title: "Integración de APIs y automatización de flujos con IA", status: "Desarrollo activo", summary: "Sistema de lenguaje natural a workflows con pasos API tipados, validación, idempotencia, reintentos y ejecución observable." },
+      { ...sharedProjects.integratex, title: "Integración de APIs y automatización de flujos con IA", status: "Completado · Demo en vivo", summary: "Sistema de lenguaje natural a workflows con pasos API tipados, validación, idempotencia, reintentos y ejecución observable." },
       { ...sharedProjects.healthbridge, title: "Prototipo responsivo de descubrimiento sanitario", status: "Prototipo completado", summary: "Interfaz mobile-first que integra búsqueda de médicos, citas, flujos de medicamentos y vistas administrativas representativas." },
       { ...sharedProjects.prevention, title: "Prototipo ético de investigación con privacidad", status: "Prototipo de investigación", summary: "Sistema de investigación limitado sobre flujos anonimizados, clasificación BERT y revisión humana obligatoria; no es una herramienta clínica." },
     ],
@@ -265,7 +265,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     ],
     projects: [
       { ...sharedProjects.opsassist, title: "Diagnostic et résolution d’incidents fondés sur les preuves", status: "Démo en direct · Développement actif", summary: "Démonstration déployée d’intelligence d’incident avec FastAPI, PostgreSQL, analyse d’anomalies, runbooks cités et remédiation synthétique soumise à approbation." },
-      { ...sharedProjects.integratex, title: "Intégration d’API et automatisation de workflows par IA", status: "Développement actif", summary: "Système transformant le langage naturel en workflow avec étapes API typées, validation, idempotence, nouvelles tentatives et exécution observable." },
+      { ...sharedProjects.integratex, title: "Intégration d’API et automatisation de workflows par IA", status: "Terminé · Démo en ligne", summary: "Système transformant le langage naturel en workflow avec étapes API typées, validation, idempotence, nouvelles tentatives et exécution observable." },
       { ...sharedProjects.healthbridge, title: "Prototype responsive de découverte de soins", status: "Prototype terminé", summary: "Interface mobile-first réunissant recherche de médecins, rendez-vous, parcours de médicaments et vues administratives représentatives." },
       { ...sharedProjects.prevention, title: "Prototype de recherche éthique et respectueux de la vie privée", status: "Prototype de recherche", summary: "Système de recherche limité sur des flux anonymisés, la classification BERT et la revue humaine obligatoire ; ce n’est pas un outil clinique." },
     ],
@@ -303,7 +303,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     ],
     projects: [
       { ...sharedProjects.opsassist, title: "エビデンスに基づくインシデント診断・解決", status: "ライブデモ・開発中", summary: "FastAPI、PostgreSQL、異常分析、引用付きRunbook検索、承認制の合成修復を備えたデプロイ済みインシデントインテリジェンスデモです。" },
-      { ...sharedProjects.integratex, title: "AIによるAPI統合・ワークフロー自動化", status: "開発中", summary: "型付きAPIステップ、検証、冪等性、再試行、観測可能な実行を備えた自然言語からワークフローへのシステムです。" },
+      { ...sharedProjects.integratex, title: "AIによるAPI統合・ワークフロー自動化", status: "完成 · ライブデモ", summary: "型付きAPIステップ、検証、冪等性、再試行、観測可能な実行を備えた自然言語からワークフローへのシステムです。" },
       { ...sharedProjects.healthbridge, title: "レスポンシブ医療検索プロトタイプ", status: "完成プロトタイプ", summary: "医師検索、予約、医薬品フロー、管理画面を統合したモバイルファーストのインターフェースです。" },
       { ...sharedProjects.prevention, title: "プライバシーに配慮した倫理的研究プロトタイプ", status: "研究プロトタイプ", summary: "匿名化ストリーム、BERT分類、必須の人間レビューを検討する限定的な研究システムです。臨床ツールではありません。" },
     ],

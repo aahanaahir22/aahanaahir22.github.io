@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import IdeaObservatory from "./IdeaObservatory";
 import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDownRight,
@@ -256,6 +257,8 @@ export default function PortfolioExperience() {
 
       <section id="top" className="hero-scene">
         <div className="hero-sticky">
+        <IdeaObservatory />
+        <p className="dream-kicker">WELCOME TO THE IDEA OBSERVATORY</p>
         <div className="hero-crosshair" aria-hidden="true">✳</div>
         <div className="hero-grid" />
         <div className="data-rain" aria-hidden="true">
@@ -264,7 +267,7 @@ export default function PortfolioExperience() {
         <div className="hero-copy">
           <p className="eyebrow"><span className="live-dot" /> INDIA / OPEN WORLDWIDE</p>
           <h1><span>Aahana</span><span>Ahir</span></h1>
-          <div className="hero-rule" /><div className="scroll-invitation" aria-hidden="true"><span>SCROLL TO TRANSFORM</span><i>↓</i></div>
+          <div className="hero-rule" /><div className="scroll-invitation" aria-hidden="true"><span>FOLLOW YOUR CURIOSITY</span><i>↓</i></div>
           <p className="hero-role">COMPUTER SCIENCE ENGINEER <i>×</i> INTELLIGENT SYSTEMS</p>
           <p className="hero-statement">Engineering intelligent systems<br />that <em>explain</em> their reasoning.</p>
           <div className="hero-actions">
@@ -280,7 +283,7 @@ export default function PortfolioExperience() {
         </div>
         <div className="hero-footer"><span>PYTHON</span><span>AI / ML</span><span>BACKEND</span><span>CLOUD</span></div>
         <div className="hero-refrain" aria-hidden="true"><span>INTELLIGENT</span><span>SYSTEMS.</span></div>
-        <div className="sequence-meter" aria-hidden="true"><span>SCROLL TO DECONSTRUCT</span><i /><b>001 / 100</b></div>
+        <div className="sequence-meter" aria-hidden="true"><span>SCROLL TO STEP INSIDE</span><i /><b>001 / 100</b></div>
         </div>
       </section>
 
