@@ -104,7 +104,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     facts: [
       { label: "Location", value: "India" },
       { label: "Graduation", value: "2027" },
-      { label: "Target roles", value: "Python · AI/ML · Software · Solutions" },
+      { label: "Target roles", value: "Full-Stack · Backend · AI · IT Support" },
     ],
     experience: [
       { period: "2024", organization: "GirlScript Summer of Code", role: "Open Source Contributor", location: "Remote", bullets: ["Investigated reported issues and reproduced defects in existing repositories.", "Contributed Python features, bug fixes and documentation through pull-request workflows.", "Incorporated maintainer feedback and improved setup usability and maintainability."] },
@@ -112,7 +112,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Core Team Member", location: "VIT Bhopal University", bullets: ["Help plan technical workshops, peer-learning sessions and student project showcases.", "Coordinate technical content, documentation and cross-team communication."] },
     ],
     projects: [
-      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
+      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "A full-stack B2B commerce and sourcing platform with authenticated buyer and supplier roles, moderated product offers, RFQs, quotations, inventory reservations and research-backed international supplier discovery." },
       { ...sharedProjects.opsassist, title: "Evidence-Backed Incident Diagnosis & Resolution", status: "Live demo · Active development", summary: "A deployed incident-intelligence demonstration with a FastAPI backend, PostgreSQL, anomaly analysis, cited runbook retrieval and approval-gated synthetic remediation." },
       { ...sharedProjects.integratex, title: "AI-Powered API Integration & Workflow Automation", status: "Completed · Live demo", summary: "A natural-language-to-workflow system designed around typed API steps, validation, idempotency, retries and observable execution." },
     ],
@@ -149,7 +149,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "कैंपस", organization: "Microsoft Technical Club", role: "कोर टीम सदस्य", location: "VIT Bhopal University", bullets: ["तकनीकी workshops, peer-learning sessions और student project showcases की योजना में सहयोग किया।", "तकनीकी सामग्री, दस्तावेज़ीकरण और cross-team communication का समन्वय किया।"] },
     ],
     projects: [
-      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
+      { ...sharedProjects.freezone, title: "वैश्विक B2B सोर्सिंग और कॉमर्स प्लेटफॉर्म", status: "डिप्लॉय · व्यावसायिक लॉन्च प्रगति पर", summary: "एक फुल-स्टैक B2B प्लेटफॉर्म जिसमें खरीदार और आपूर्तिकर्ता की सत्यापित पहचान, उत्पाद अनुमोदन, कोटेशन अनुरोध, इन्वेंट्री आरक्षण तथा अंतरराष्ट्रीय आपूर्तिकर्ताओं की स्रोत-आधारित जानकारी शामिल है।" },
       { ...sharedProjects.opsassist, title: "प्रमाण-आधारित घटना निदान एवं समाधान", status: "लाइव डेमो · सक्रिय विकास", summary: "FastAPI backend, PostgreSQL, anomaly analysis, cited runbook retrieval और approval-gated synthetic remediation वाला deployed incident-intelligence demonstration।" },
       { ...sharedProjects.integratex, title: "AI-संचालित API Integration एवं Workflow Automation", status: "पूर्ण · लाइव डेमो", summary: "Typed API steps, validation, idempotency, retries और observable execution पर आधारित natural-language-to-workflow system।" },
     ],
@@ -186,7 +186,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Mitglied des Kernteams", location: "VIT Bhopal University", bullets: ["Technische Workshops, Peer-Learning-Sessions und Projektpräsentationen mitgeplant.", "Technische Inhalte, Dokumentation und teamübergreifende Kommunikation koordiniert."] },
     ],
     projects: [
-      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
+      { ...sharedProjects.freezone, title: "Globale B2B-Beschaffungs- und Handelsplattform", status: "Bereitgestellt · Markteinführung läuft", summary: "Full-Stack-Plattform für B2B-Beschaffung mit authentifizierten Käufer- und Lieferantenrollen, geprüften Angeboten, Anfragen, Preisangeboten, Bestandsreservierungen und quellenbasierter internationaler Lieferantensuche." },
       { ...sharedProjects.opsassist, title: "Evidenzbasierte Störungsdiagnose und -behebung", status: "Live-Demo · Aktive Entwicklung", summary: "Eine bereitgestellte Incident-Intelligence-Demo mit FastAPI, PostgreSQL, Anomalieanalyse, zitierter Runbook-Suche und freigabegesteuerter synthetischer Behebung." },
       { ...sharedProjects.integratex, title: "KI-gestützte API-Integration und Workflow-Automatisierung", status: "Abgeschlossen · Live-Demo", summary: "Ein Natural-Language-to-Workflow-System mit typisierten API-Schritten, Validierung, Idempotenz, Wiederholungen und beobachtbarer Ausführung." },
     ],
@@ -223,7 +223,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Miembro del equipo central", location: "VIT Bhopal University", bullets: ["Colaboro en talleres técnicos, sesiones de aprendizaje entre pares y muestras de proyectos.", "Coordino contenido técnico, documentación y comunicación entre equipos."] },
     ],
     projects: [
-      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
+      { ...sharedProjects.freezone, title: "Plataforma global de abastecimiento y comercio B2B", status: "Desplegada · Lanzamiento comercial en curso", summary: "Plataforma B2B full-stack con perfiles autenticados de compradores y proveedores, moderación de productos, solicitudes de cotización, ofertas, reservas de inventario y descubrimiento internacional con fuentes identificadas." },
       { ...sharedProjects.opsassist, title: "Diagnóstico y resolución de incidentes con evidencia", status: "Demo en vivo · Desarrollo activo", summary: "Demostración desplegada de inteligencia de incidentes con FastAPI, PostgreSQL, análisis de anomalías, recuperación de runbooks citados y remediación sintética con aprobación." },
       { ...sharedProjects.integratex, title: "Integración de APIs y automatización de flujos con IA", status: "Completado · Demo en vivo", summary: "Sistema de lenguaje natural a workflows con pasos API tipados, validación, idempotencia, reintentos y ejecución observable." },
     ],
@@ -260,7 +260,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Membre de l’équipe principale", location: "VIT Bhopal University", bullets: ["Participation à l’organisation d’ateliers, de sessions d’apprentissage et de présentations de projets.", "Coordination du contenu technique, de la documentation et de la communication inter-équipes."] },
     ],
     projects: [
-      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
+      { ...sharedProjects.freezone, title: "Plateforme mondiale d’approvisionnement et de commerce B2B", status: "Déployée · Lancement commercial en cours", summary: "Plateforme B2B full-stack avec comptes acheteurs et fournisseurs authentifiés, validation des offres, demandes de devis, devis, réservations de stock et recherche internationale de fournisseurs avec références documentées." },
       { ...sharedProjects.opsassist, title: "Diagnostic et résolution d’incidents fondés sur les preuves", status: "Démo en direct · Développement actif", summary: "Démonstration déployée d’intelligence d’incident avec FastAPI, PostgreSQL, analyse d’anomalies, runbooks cités et remédiation synthétique soumise à approbation." },
       { ...sharedProjects.integratex, title: "Intégration d’API et automatisation de workflows par IA", status: "Terminé · Démo en ligne", summary: "Système transformant le langage naturel en workflow avec étapes API typées, validation, idempotence, nouvelles tentatives et exécution observable." },
     ],
@@ -297,7 +297,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "学内", organization: "Microsoft Technical Club", role: "コアチームメンバー", location: "VIT Bhopal University", bullets: ["技術ワークショップ、ピアラーニング、学生プロジェクト展示の企画を支援しました。", "技術コンテンツ、文書、チーム間コミュニケーションを調整しました。"] },
     ],
     projects: [
-      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
+      { ...sharedProjects.freezone, title: "グローバルB2B調達・商取引プラットフォーム", status: "公開済み・商用展開準備中", summary: "買い手とサプライヤーの認証、商品掲載の審査、見積もり依頼、価格提示、在庫確保、出典が明確な海外サプライヤー調査を備えたフルスタックB2Bプラットフォームです。" },
       { ...sharedProjects.opsassist, title: "エビデンスに基づくインシデント診断・解決", status: "ライブデモ・開発中", summary: "FastAPI、PostgreSQL、異常分析、引用付きRunbook検索、承認制の合成修復を備えたデプロイ済みインシデントインテリジェンスデモです。" },
       { ...sharedProjects.integratex, title: "AIによるAPI統合・ワークフロー自動化", status: "完成 · ライブデモ", summary: "型付きAPIステップ、検証、冪等性、再試行、観測可能な実行を備えた自然言語からワークフローへのシステムです。" },
     ],
