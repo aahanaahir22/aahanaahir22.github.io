@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Download, ExternalLink, GitBranch as Github, Contact as Linkedin, Mail } from "lucide-react";
 import { certifications, resumeContent } from "@/data/resume";
 import { projects } from "@/data/projects";
 
