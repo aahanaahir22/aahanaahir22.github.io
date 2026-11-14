@@ -71,6 +71,7 @@ export type ResumeContent = {
 };
 
 const sharedProjects = {
+  freezone: { name: "FreezoneB2B", stack: ["Next.js", "React", "TypeScript", "PostgreSQL", "Drizzle ORM", "Clerk", "Zod"], demoUrl: "https://freezoneb2b.vercel.app/" },
   opsassist: {
     name: "OpsAssist AI",
     stack: ["Python", "FastAPI", "PostgreSQL", "FAISS", "React", "Docker"],
@@ -78,8 +79,7 @@ const sharedProjects = {
     demoUrl: "https://aahanaahir22.github.io/opsassist-ai/",
   },
   integratex: { name: "IntegrateX", repositoryUrl: "https://github.com/aahanaahir22/integratex", demoUrl: "https://aahanaahir22.github.io/integratex/", stack: ["Python", "FastAPI", "Redis", "Celery", "RAG"] },
-  healthbridge: { name: "HealthBridge", stack: ["HTML", "CSS", "JavaScript", "Responsive UI"] },
-  prevention: { name: "Suicide Prevention Microservice", stack: ["Go", "Kafka", "Python", "BERT", "Redis"] },
+
 };
 
 export const certifications = [
@@ -100,7 +100,7 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
     },
     actions: { portfolio: "Back to portfolio", print: "Print / Save PDF", repository: "Repository", demo: "Live demo", selectLanguage: "Select résumé language" },
     labels: { profile: "Profile", experience: "Experience", projects: "Selected projects", education: "Education", skills: "Technical capabilities", credentials: "Verified credentials", languages: "Languages", contact: "Contact", issued: "Issued", coursework: "Relevant coursework", cgpa: "CGPA" },
-    summary: "Final-year B.Tech Computer Science and Engineering student focused on Python, AI/ML, backend APIs and cloud-ready software. I build evidence-aware systems with typed boundaries, explainable decisions, human approval and honest evaluation.",
+    summary: "Final-year B.Tech Computer Science Engineering student building full-stack commerce products, Python backend APIs and explainable AI applications. Developed FreezoneB2B with Next.js, PostgreSQL, secure identity, typed services and cloud deployment.",
     facts: [
       { label: "Location", value: "India" },
       { label: "Graduation", value: "2027" },
@@ -112,10 +112,9 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Core Team Member", location: "VIT Bhopal University", bullets: ["Help plan technical workshops, peer-learning sessions and student project showcases.", "Coordinate technical content, documentation and cross-team communication."] },
     ],
     projects: [
+      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
       { ...sharedProjects.opsassist, title: "Evidence-Backed Incident Diagnosis & Resolution", status: "Live demo · Active development", summary: "A deployed incident-intelligence demonstration with a FastAPI backend, PostgreSQL, anomaly analysis, cited runbook retrieval and approval-gated synthetic remediation." },
       { ...sharedProjects.integratex, title: "AI-Powered API Integration & Workflow Automation", status: "Completed · Live demo", summary: "A natural-language-to-workflow system designed around typed API steps, validation, idempotency, retries and observable execution." },
-      { ...sharedProjects.healthbridge, title: "Responsive Healthcare Discovery Prototype", status: "Completed prototype", summary: "A mobile-first interface joining doctor discovery, appointment booking, medicine flows and representative administrative views." },
-      { ...sharedProjects.prevention, title: "Privacy-Aware Ethical Research Prototype", status: "Research prototype", summary: "A bounded research system exploring anonymized streams, BERT-based classification and mandatory human-review safeguards; not a clinical tool." },
     ],
     education: { institution: "VIT Bhopal University", degree: "B.Tech in Computer Science and Engineering", period: "2023–2027 · Final year", cgpa: "8.3 / 10", coursework: ["Data Structures & Algorithms", "Database Management Systems", "Operating Systems", "Computer Networks", "Software Engineering", "Artificial Intelligence & Machine Learning", "Cloud Computing"] },
     skillGroups: [
@@ -150,10 +149,9 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "कैंपस", organization: "Microsoft Technical Club", role: "कोर टीम सदस्य", location: "VIT Bhopal University", bullets: ["तकनीकी workshops, peer-learning sessions और student project showcases की योजना में सहयोग किया।", "तकनीकी सामग्री, दस्तावेज़ीकरण और cross-team communication का समन्वय किया।"] },
     ],
     projects: [
+      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
       { ...sharedProjects.opsassist, title: "प्रमाण-आधारित घटना निदान एवं समाधान", status: "लाइव डेमो · सक्रिय विकास", summary: "FastAPI backend, PostgreSQL, anomaly analysis, cited runbook retrieval और approval-gated synthetic remediation वाला deployed incident-intelligence demonstration।" },
       { ...sharedProjects.integratex, title: "AI-संचालित API Integration एवं Workflow Automation", status: "पूर्ण · लाइव डेमो", summary: "Typed API steps, validation, idempotency, retries और observable execution पर आधारित natural-language-to-workflow system।" },
-      { ...sharedProjects.healthbridge, title: "Responsive Healthcare Discovery Prototype", status: "पूर्ण प्रोटोटाइप", summary: "Doctor discovery, appointment booking, medicine flows और representative administrative views को जोड़ने वाला mobile-first interface।" },
-      { ...sharedProjects.prevention, title: "गोपनीयता-सचेत नैतिक शोध प्रोटोटाइप", status: "शोध प्रोटोटाइप", summary: "Anonymized streams, BERT classification और अनिवार्य human review पर केंद्रित सीमित शोध सिस्टम; यह clinical tool नहीं है।" },
     ],
     education: { institution: "VIT Bhopal University", degree: "बी.टेक — कंप्यूटर साइंस एवं इंजीनियरिंग", period: "2023–2027 · अंतिम वर्ष", cgpa: "8.3 / 10", coursework: ["डेटा स्ट्रक्चर एवं एल्गोरिदम", "डेटाबेस मैनेजमेंट सिस्टम", "ऑपरेटिंग सिस्टम", "कंप्यूटर नेटवर्क", "सॉफ्टवेयर इंजीनियरिंग", "आर्टिफिशियल इंटेलिजेंस एवं मशीन लर्निंग", "क्लाउड कंप्यूटिंग"] },
     skillGroups: [
@@ -188,10 +186,9 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Mitglied des Kernteams", location: "VIT Bhopal University", bullets: ["Technische Workshops, Peer-Learning-Sessions und Projektpräsentationen mitgeplant.", "Technische Inhalte, Dokumentation und teamübergreifende Kommunikation koordiniert."] },
     ],
     projects: [
+      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
       { ...sharedProjects.opsassist, title: "Evidenzbasierte Störungsdiagnose und -behebung", status: "Live-Demo · Aktive Entwicklung", summary: "Eine bereitgestellte Incident-Intelligence-Demo mit FastAPI, PostgreSQL, Anomalieanalyse, zitierter Runbook-Suche und freigabegesteuerter synthetischer Behebung." },
       { ...sharedProjects.integratex, title: "KI-gestützte API-Integration und Workflow-Automatisierung", status: "Abgeschlossen · Live-Demo", summary: "Ein Natural-Language-to-Workflow-System mit typisierten API-Schritten, Validierung, Idempotenz, Wiederholungen und beobachtbarer Ausführung." },
-      { ...sharedProjects.healthbridge, title: "Responsiver Healthcare-Discovery-Prototyp", status: "Abgeschlossener Prototyp", summary: "Eine Mobile-First-Oberfläche für Arztsuche, Terminbuchung, Medikamentenabläufe und repräsentative Verwaltungsansichten." },
-      { ...sharedProjects.prevention, title: "Datenschutzbewusster ethischer Forschungsprototyp", status: "Forschungsprototyp", summary: "Ein begrenztes Forschungssystem zu anonymisierten Datenströmen, BERT-Klassifikation und verpflichtender menschlicher Prüfung; kein klinisches Werkzeug." },
     ],
     education: { institution: "VIT Bhopal University", degree: "B.Tech in Informatik und Ingenieurwesen", period: "2023–2027 · Abschlussjahr", cgpa: "8,3 / 10", coursework: ["Datenstrukturen & Algorithmen", "Datenbanksysteme", "Betriebssysteme", "Computernetzwerke", "Software Engineering", "Künstliche Intelligenz & Machine Learning", "Cloud Computing"] },
     skillGroups: [
@@ -226,10 +223,9 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Miembro del equipo central", location: "VIT Bhopal University", bullets: ["Colaboro en talleres técnicos, sesiones de aprendizaje entre pares y muestras de proyectos.", "Coordino contenido técnico, documentación y comunicación entre equipos."] },
     ],
     projects: [
+      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
       { ...sharedProjects.opsassist, title: "Diagnóstico y resolución de incidentes con evidencia", status: "Demo en vivo · Desarrollo activo", summary: "Demostración desplegada de inteligencia de incidentes con FastAPI, PostgreSQL, análisis de anomalías, recuperación de runbooks citados y remediación sintética con aprobación." },
       { ...sharedProjects.integratex, title: "Integración de APIs y automatización de flujos con IA", status: "Completado · Demo en vivo", summary: "Sistema de lenguaje natural a workflows con pasos API tipados, validación, idempotencia, reintentos y ejecución observable." },
-      { ...sharedProjects.healthbridge, title: "Prototipo responsivo de descubrimiento sanitario", status: "Prototipo completado", summary: "Interfaz mobile-first que integra búsqueda de médicos, citas, flujos de medicamentos y vistas administrativas representativas." },
-      { ...sharedProjects.prevention, title: "Prototipo ético de investigación con privacidad", status: "Prototipo de investigación", summary: "Sistema de investigación limitado sobre flujos anonimizados, clasificación BERT y revisión humana obligatoria; no es una herramienta clínica." },
     ],
     education: { institution: "VIT Bhopal University", degree: "B.Tech en Informática e Ingeniería", period: "2023–2027 · Último año", cgpa: "8,3 / 10", coursework: ["Estructuras de datos y algoritmos", "Sistemas de bases de datos", "Sistemas operativos", "Redes informáticas", "Ingeniería de software", "Inteligencia artificial y machine learning", "Cloud computing"] },
     skillGroups: [
@@ -264,10 +260,9 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "Campus", organization: "Microsoft Technical Club", role: "Membre de l’équipe principale", location: "VIT Bhopal University", bullets: ["Participation à l’organisation d’ateliers, de sessions d’apprentissage et de présentations de projets.", "Coordination du contenu technique, de la documentation et de la communication inter-équipes."] },
     ],
     projects: [
+      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
       { ...sharedProjects.opsassist, title: "Diagnostic et résolution d’incidents fondés sur les preuves", status: "Démo en direct · Développement actif", summary: "Démonstration déployée d’intelligence d’incident avec FastAPI, PostgreSQL, analyse d’anomalies, runbooks cités et remédiation synthétique soumise à approbation." },
       { ...sharedProjects.integratex, title: "Intégration d’API et automatisation de workflows par IA", status: "Terminé · Démo en ligne", summary: "Système transformant le langage naturel en workflow avec étapes API typées, validation, idempotence, nouvelles tentatives et exécution observable." },
-      { ...sharedProjects.healthbridge, title: "Prototype responsive de découverte de soins", status: "Prototype terminé", summary: "Interface mobile-first réunissant recherche de médecins, rendez-vous, parcours de médicaments et vues administratives représentatives." },
-      { ...sharedProjects.prevention, title: "Prototype de recherche éthique et respectueux de la vie privée", status: "Prototype de recherche", summary: "Système de recherche limité sur des flux anonymisés, la classification BERT et la revue humaine obligatoire ; ce n’est pas un outil clinique." },
     ],
     education: { institution: "VIT Bhopal University", degree: "B.Tech en informatique et ingénierie", period: "2023–2027 · Dernière année", cgpa: "8,3 / 10", coursework: ["Structures de données et algorithmes", "Systèmes de bases de données", "Systèmes d’exploitation", "Réseaux informatiques", "Génie logiciel", "Intelligence artificielle et machine learning", "Cloud computing"] },
     skillGroups: [
@@ -302,10 +297,9 @@ export const resumeContent: Record<ResumeLocale, ResumeContent> = {
       { period: "学内", organization: "Microsoft Technical Club", role: "コアチームメンバー", location: "VIT Bhopal University", bullets: ["技術ワークショップ、ピアラーニング、学生プロジェクト展示の企画を支援しました。", "技術コンテンツ、文書、チーム間コミュニケーションを調整しました。"] },
     ],
     projects: [
+      { ...sharedProjects.freezone, title: "Global B2B Sourcing & Commerce Platform", status: "Deployed · Commercial rollout in progress", summary: "Full-stack B2B sourcing and commerce platform with authentication, supplier review, RFQs, quotes, inventory and researched global directory references." },
       { ...sharedProjects.opsassist, title: "エビデンスに基づくインシデント診断・解決", status: "ライブデモ・開発中", summary: "FastAPI、PostgreSQL、異常分析、引用付きRunbook検索、承認制の合成修復を備えたデプロイ済みインシデントインテリジェンスデモです。" },
       { ...sharedProjects.integratex, title: "AIによるAPI統合・ワークフロー自動化", status: "完成 · ライブデモ", summary: "型付きAPIステップ、検証、冪等性、再試行、観測可能な実行を備えた自然言語からワークフローへのシステムです。" },
-      { ...sharedProjects.healthbridge, title: "レスポンシブ医療検索プロトタイプ", status: "完成プロトタイプ", summary: "医師検索、予約、医薬品フロー、管理画面を統合したモバイルファーストのインターフェースです。" },
-      { ...sharedProjects.prevention, title: "プライバシーに配慮した倫理的研究プロトタイプ", status: "研究プロトタイプ", summary: "匿名化ストリーム、BERT分類、必須の人間レビューを検討する限定的な研究システムです。臨床ツールではありません。" },
     ],
     education: { institution: "VIT Bhopal University", degree: "B.Tech コンピュータサイエンス工学", period: "2023–2027・最終学年", cgpa: "8.3 / 10", coursework: ["データ構造とアルゴリズム", "データベース管理システム", "オペレーティングシステム", "コンピュータネットワーク", "ソフトウェア工学", "人工知能・機械学習", "クラウドコンピューティング"] },
     skillGroups: [
