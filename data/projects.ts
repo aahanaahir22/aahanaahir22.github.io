@@ -63,7 +63,6 @@ export const projects: Project[] = [
     next: ["Complete payment provider onboarding", "Integrate shipping and customs providers", "Conduct production security and load validation", "Onboard and verify genuine suppliers"],
     notice: "The product is deployed, but commercial onboarding is in progress. Payment and delivery are not yet certified. The directory and synthetic benchmarks are not evidence of customers, inventory or sales."
   },
-] = [
   {
     number: "002",
     slug: "opsassist-ai",
