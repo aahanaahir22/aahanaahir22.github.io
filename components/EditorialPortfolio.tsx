@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, Download, ExternalLink, Github, Linkedin, Mail, Menu, X } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, Download, ExternalLink, GitBranch as Github, Contact as Linkedin, Mail, Menu, X } from "lucide-react";
 import { projects } from "@/data/projects";
 import { certifications } from "@/data/resume";
 
