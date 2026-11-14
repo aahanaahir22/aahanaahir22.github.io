@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./editorial.css";
+import "./motion.css";
 
 export const metadata: Metadata = {
   title: { default: "Aahana Ahir — Full-Stack & Backend Engineer", template: "%s — Aahana Ahir" },
