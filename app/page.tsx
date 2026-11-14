@@ -1,5 +1,2 @@
-import PortfolioExperience from "@/components/PortfolioExperience";
-
-export default function Home() {
-  return <PortfolioExperience />;
-}
+import EditorialPortfolio from "@/components/EditorialPortfolio";
+export default function Home() { return <EditorialPortfolio />; }
