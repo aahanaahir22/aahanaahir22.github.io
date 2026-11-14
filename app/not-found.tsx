@@ -1,13 +1,3 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-
-export default function NotFound() {
-  return (
-    <main className="not-found">
-      <p className="section-code">ERROR / UNMAPPED SIGNAL</p>
-      <h1>404</h1>
-      <p>This coordinate does not exist inside Aahana’s systems universe.</p>
-      <Link className="signal-button" href="/"><ArrowLeft size={16} /> Return to orbit</Link>
-    </main>
-  );
-}
+export default function NotFound() { return <main className="ed-case" style={{minHeight:"100svh",display:"grid",placeItems:"center",padding:24,textAlign:"center"}}><div><p style={{fontSize:13,letterSpacing:".1em"}}>404 / PAGE NOT FOUND</p><h1 style={{fontSize:"clamp(72px,12vw,160px)",letterSpacing:"-.08em",margin:"16px 0"}}>Not here.</h1><p>The page may have moved as part of the portfolio redesign.</p><Link href="/" style={{display:"inline-flex",alignItems:"center",gap:10,borderBottom:"1px solid",paddingBottom:8,marginTop:25}}><ArrowLeft size={16}/> Back to the portfolio</Link></div></main>; }
