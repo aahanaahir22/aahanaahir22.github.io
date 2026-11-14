@@ -1,44 +1,48 @@
-# Aahana Ahir — Intelligent Systems Portfolio
+# Aahana Ahir — Creative Engineering Portfolio
 
-Live portfolio: **https://aahanaahir22.github.io**
+Portfolio: **https://aahanaahir22.github.io/**
 
-An immersive, responsive technical portfolio for Aahana Ahir, a final-year Computer Science Engineering student focused on Python, AI/ML, backend systems and cloud-ready software.
+A restrained, interactive portfolio for international full-stack, backend, AI and IT support roles, built with Next.js 16, React 19 and TypeScript.
 
-## Experience
+## Work
 
-- Opt-in Web Audio entry with a silent alternative
-- Spatial intelligence-core hero and scroll-led editorial sections
-- Interactive skills-to-project mapping
-- Four reusable, evidence-aware project case studies
-- Interactive system traces and architecture flows
-- Responsive mobile layouts and reduced-motion support
-- Keyboard navigation, semantic structure, sitemap and metadata
-- Interactive résumé translated into six languages with language-specific 3D themes and print-to-PDF support
+- **FreezoneB2B** — https://freezoneb2b.vercel.app/ — Global B2B marketplace and sourcing platform, with source-attributed research and in-progress commercial integrations.
+- **OpsAssist AI** — https://aahanaahir22.github.io/opsassist-ai/ — Evidence-backed incident intelligence.
+- **IntegrateX** — https://aahanaahir22.github.io/integratex/ — API workflow automation.
 
-## Routes
+Sourced company references, demo products and isolated staging benchmarks are explicitly differentiated from verified live inventory, customers and production throughput. Public case studies link to real demos and repositories where available.
 
-- `/` — portfolio universe
-- `/resume` — multilingual interactive résumé (English, Hindi, German, Spanish, French and Japanese)
+## Design
+
+Homepage sections: Introduction, Work, Expertise, About, GitHub and Contact. Motion is purposeful, progressive enhancement is the default, and reduced-motion preferences are respected. No audio gate or decorative introduction is required.
+
+Paths:
+- `/`
+- `/resume`
+- `/projects/freezoneb2b`
 - `/projects/opsassist-ai`
 - `/projects/integratex`
-- `/projects/healthbridge`
-- `/projects/suicide-prevention-microservice`
 
-## Local development
+## Development
 
-Requirements: Node.js 22.13 or newer.
+Node.js 22 or newer.
 
 ```bash
 npm install
 npm run dev
-```
-
-Create the production GitHub Pages export with:
-
-```bash
 npm run build:github
 ```
 
-The GitHub Actions workflow builds and republishes the portfolio whenever the `main` branch changes.
+The static export is compatible with GitHub Pages through `next.config.ts` and the workflow `.github/workflows/deploy-pages.yml`.
 
-Project claims, prototype results and future evaluation criteria are intentionally separated so the portfolio does not fabricate repositories, metrics, users or deployment evidence.
+The one-page PDF resume is published at `/Aahana_Ahir_Resume_International_Impact_1_Page.pdf`.
+
+## Reliability
+
+- Project content and measured claims are contained in `data/projects.ts`.
+- Certifications and localized résumé data are in `data/resume.ts`.
+- Layout styles are in `app/editorial.css`.
+- Interactive client components: `EditorialPortfolio` and `CaseExplorer`.
+- Never put secrets or private GitHub credentials in static client code.
+
+Run `npx tsc --noEmit` and `npm run build:github` before merging. The PR validation workflow checks exported pages, removed obsolete project routes and the PDF.
