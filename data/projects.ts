@@ -23,7 +23,49 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    number: "001",
+    number: "001", slug: "freezoneb2b", shortName: "FreezoneB2B",
+    title: "Global B2B Sourcing & Commerce Platform",
+    tagline: "Trade infrastructure built around real product, supplier and business workflows.",
+    status: "Deployed · Commercial rollout in progress", statusTone: "green",
+    stack: ["Next.js", "React", "TypeScript", "Neon PostgreSQL", "Drizzle ORM", "Clerk", "Zod", "Vercel"],
+    demoUrl: "https://freezoneb2b.vercel.app/",
+    problem: "International sourcing often fragments supplier research, product discovery, quotations and business onboarding across disconnected tools.",
+    solution: "Built a full-stack marketplace supporting verified-email buyer and supplier accounts, business onboarding, moderated product listings, RFQs, quotations, stock reservations and trade discovery. Public source references and demonstration products are always distinguished from approved seller stock.",
+    principles: ["Validate commerce actions at the server boundary", "Separate researched leads from approved inventory", "Keep currency and fulfilment constraints clear", "Never imply payment success before confirmation"],
+    evaluation: ["Finish live gateway onboarding and verified payment workflows", "Complete logistics/customs integrations", "Conduct authenticated end-to-end load tests", "Measure real conversion and onboarding usability"],
+    architecture: [
+      { label: "Presentation", detail: "Next.js / React with responsive marketplace search, listings, dashboards and checkout journeys." },
+      { label: "Identity", detail: "Clerk verified-email authentication and persistent role-based business onboarding." },
+      { label: "API", detail: "Server-side handlers with Zod validation and scoped authorization for supplier and buyer actions." },
+      { label: "Data", detail: "Neon PostgreSQL and Drizzle ORM for offers, inventory, orders, business profiles and quotation state." },
+      { label: "Discovery", detail: "Sourced company references and demonstrative variants are separated from genuine approved offers." },
+      { label: "Commerce", detail: "RFQ/quotation comparison, server-calculated orders and inventory reservations; live payment release remains gated." }
+    ],
+    lifecycle: [
+      { label: "Explore", detail: "Browse 2,873 sourced companies across 69 regions and 7,894 published range references. These are research entries, not onboarded sellers." },
+      { label: "Join", detail: "Complete verified sign-in and persistent buyer or supplier business onboarding." },
+      { label: "List", detail: "Submit offers with stock, pricing, MOQ and source details for business and product review." },
+      { label: "Negotiate", detail: "Issue RFQs, compare quotations and review freight, taxes and terms." },
+      { label: "Order", detail: "Produce server-calculated order records and stock reservations; real payments and delivery need further release verification." }
+    ],
+    decisions: [
+      { title: "Relational commerce model", body: "PostgreSQL and Drizzle keep product, supplier, role and order states traceable and queryable." },
+      { title: "Explicit data provenance", body: "Research leads, 600 demo variants and approved stock use distinct labels to prevent misleading buyers." },
+      { title: "Authenticated service boundaries", body: "Verified identity, server-side role checks, validation and approval states protect sensitive transactions." },
+      { title: "Evidence-led performance", body: "A query-service benchmark used 100,000 synthetic staging rows; it is not production throughput evidence." }
+    ],
+    measured: [
+      { value: "2,873", label: "Sourced businesses", context: "Public directory research; not verified marketplace sellers." },
+      { value: "69", label: "Countries / regions", context: "Source directory coverage, not active markets." },
+      { value: "7,894", label: "Range references", context: "Public product/range references, not live inventory." },
+      { value: "100k", label: "Staging test rows", context: "Synthetic records in an isolated catalogue-query benchmark." }
+    ],
+    next: ["Complete payment provider onboarding", "Integrate shipping and customs providers", "Conduct production security and load validation", "Onboard and verify genuine suppliers"],
+    notice: "The product is deployed, but commercial onboarding is in progress. Payment and delivery are not yet certified. The directory and synthetic benchmarks are not evidence of customers, inventory or sales."
+  },
+] = [
+  {
+    number: "002",
     slug: "opsassist-ai",
     shortName: "OpsAssist AI",
     title: "Evidence-Backed Incident Diagnosis & Resolution",
@@ -61,7 +103,7 @@ export const projects: Project[] = [
     notice: "The public demo connects to a live Python backend and PostgreSQL. Remediation runs only against a synthetic simulator—not real customer infrastructure.",
   },
   {
-    number: "002",
+    number: "003",
     slug: "integratex",
     shortName: "IntegrateX",
     title: "AI-Powered API Integration & Workflow Automation",
@@ -98,81 +140,5 @@ export const projects: Project[] = [
     ],
     next: ["Ship connector SDK", "Implement visual workflow trace", "Create failure-injection suite", "Benchmark multi-step recovery"],
   },
-  {
-    number: "003",
-    slug: "healthbridge",
-    shortName: "HealthBridge",
-    title: "Care, Connected",
-    tagline: "A responsive healthcare discovery and booking prototype focused on clarity.",
-    status: "Completed Prototype",
-    statusTone: "green",
-    stack: ["HTML", "CSS", "JavaScript", "Responsive UI", "Form Validation"],
-    problem: "Healthcare discovery, booking and medicine flows can become fragmented and difficult to navigate on smaller screens.",
-    solution: "HealthBridge brings doctor discovery, appointment booking, medicine delivery and administrative views into one responsive front-end prototype.",
-    principles: ["Mobile-first readability", "Clear form feedback", "Consistent task flow", "Honest simulated data"],
-    evaluation: ["Responsive behavior", "Form-validation coverage", "Task-flow clarity", "Local prototype load time"],
-    architecture: [
-      { label: "Discover", detail: "Responsive browsing surfaces doctors and services." },
-      { label: "Select", detail: "A visitor chooses a care path and time." },
-      { label: "Validate", detail: "Client-side rules prevent incomplete form submission." },
-      { label: "Confirm", detail: "A simulated confirmation makes the prototype state explicit." },
-      { label: "Admin", detail: "A dashboard organizes representative booking data." },
-    ],
-    lifecycle: [
-      { label: "Find a doctor", detail: "Browse representative profiles through a responsive discovery interface." },
-      { label: "Book an appointment", detail: "Complete a guided form with visible validation and confirmation states." },
-      { label: "Explore medicine delivery", detail: "Move through a simulated ordering flow without implying real fulfilment." },
-      { label: "Review operations", detail: "The admin prototype demonstrates how bookings could be organized." },
-    ],
-    decisions: [
-      { title: "Progressive enhancement", body: "The core structure remains readable while JavaScript adds validation and interface state." },
-      { title: "Responsive from the first layout", body: "Navigation, forms and panels are composed for touch before expanding to desktop." },
-      { title: "Prototype boundaries are visible", body: "Representative records and confirmations are identified as simulated data." },
-    ],
-    next: ["Connect a real backend", "Add authenticated user roles", "Run formal usability testing", "Add end-to-end tests"],
-    notice: "This is a completed front-end prototype. Its healthcare data, bookings and fulfilment states are simulated.",
-    measured: [{ value: "<1.4s", label: "Local page load", context: "Observed in the prototype environment; not a production benchmark." }],
-  },
-  {
-    number: "004",
-    slug: "suicide-prevention-microservice",
-    shortName: "Suicide Prevention Microservice",
-    title: "Ethical Research Prototype",
-    tagline: "Privacy-aware signal classification with deliberate human review boundaries.",
-    status: "Ethical Research Prototype",
-    statusTone: "violet",
-    stack: ["Go", "Kafka", "Python", "BERT", "Redis", "Twilio"],
-    problem: "Research into early-risk signals must balance timely analysis with privacy, false-positive risk and the danger of treating a model output as a clinical judgment.",
-    solution: "This research prototype explores anonymized streaming ingestion, BERT-based risk classification, minimized location data and controlled alert routing with explicit human-review safeguards.",
-    principles: ["Not a clinical diagnosis", "Minimize personal data", "Human review before intervention", "Measure false-positive harm"],
-    evaluation: ["Prototype classification accuracy", "Prototype alert latency", "False-positive analysis", "Privacy-control coverage", "Human-review compliance"],
-    architecture: [
-      { label: "Ingest", detail: "Public research data enters a bounded stream." },
-      { label: "Minimize", detail: "Identifiers and unnecessary geo-data are removed." },
-      { label: "Classify", detail: "A BERT research model produces a calibrated risk score." },
-      { label: "Review", detail: "High-risk signals enter controlled human review." },
-      { label: "Route", detail: "Only reviewed cases reach a simulated alert channel." },
-      { label: "Audit", detail: "Safeguard decisions and model limitations stay visible." },
-    ],
-    lifecycle: [
-      { label: "Bounded research stream", detail: "The experiment operates on a prototype dataset, not private platform surveillance." },
-      { label: "Privacy filtering", detail: "Direct identifiers are removed and location precision is minimized." },
-      { label: "Risk classification", detail: "The model estimates a research label while uncertainty remains explicit." },
-      { label: "Human review", detail: "A score alone never represents diagnosis or authorizes an intervention." },
-      { label: "Controlled routing", detail: "The simulated notification path is measured without claiming clinical deployment." },
-    ],
-    decisions: [
-      { title: "Human review is structural", body: "Review is a required system state, not a disclaimer added after classification." },
-      { title: "Data minimization before inference", body: "The pipeline removes unnecessary identity and location fields before they reach the model." },
-      { title: "Accuracy is not safety", body: "Aggregate accuracy is reported alongside the need for false-positive, bias and calibration analysis." },
-    ],
-    next: ["Run subgroup and calibration analysis", "Formalize reviewer protocol", "Threat-model data handling", "Seek domain-expert evaluation"],
-    notice: "Research prototype only. It is not a clinical diagnosis system, crisis service or replacement for professional emergency support.",
-    measured: [
-      { value: "87%", label: "Prototype accuracy", context: "Reported on a 50,000-post prototype dataset; requires fuller error and bias analysis." },
-      { value: "0.4s", label: "Prototype alert latency", context: "Observed in the prototype pipeline; not a clinical response-time claim." },
-    ],
-  },
 ];
-
 export const getProject = (slug: string) => projects.find((project) => project.slug === slug);
