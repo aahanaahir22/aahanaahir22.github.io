@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./immersive.css";
-import "./observatory.css";
-import MotionExperience from "@/components/MotionExperience";
+import "./editorial.css";
 
 export const metadata: Metadata = {
-  title: "Aahana Ahir — Intelligent Systems Portfolio",
-  description: "Python, AI/ML, backend and cloud systems engineered with evidence, explainability and human control.",
-  keywords: ["Aahana Ahir", "Python Developer", "AI ML Engineer", "Software Engineer", "Solutions Engineer"],
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  title: { default: "Aahana Ahir — Full-Stack & Backend Engineer", template: "%s — Aahana Ahir" },
+  description: "Aahana Ahir builds full-stack commerce products, backend services and thoughtful AI systems. Explore FreezoneB2B, OpsAssist AI and IntegrateX.",
+  keywords: ["Aahana Ahir", "Full-Stack Developer", "Backend Engineer", "Next.js", "PostgreSQL", "AI Engineering", "IT Support"],
+  metadataBase: new URL("https://aahanaahir22.github.io"),
+  alternates: { canonical: "/" },
+  openGraph: { type: "website", title: "Aahana Ahir — Engineering that goes beyond the demo", description: "Selected full-stack, backend and AI engineering work.", url: "https://aahanaahir22.github.io" },
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><MotionExperience />{children}</body></html>;
+  return <html lang="en"><body>{children}</body></html>;
 }
