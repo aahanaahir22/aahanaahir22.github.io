@@ -1,0 +1,32 @@
+name: Verify editorial portfolio
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Type-check
+        run: npx tsc --noEmit
+      - name: Build static GitHub Pages export
+        run: npm run build:github
+      - name: Verify routes and ATS resume
+        run: |
+          test -f out/index.html
+          test -f out/resume/index.html
+          test -f out/projects/freezoneb2b/index.html
+          test -f out/projects/opsassist-ai/index.html
+          test -f out/projects/integratex/index.html
+          test -s out/Aahana_Ahir_Resume_International_Impact_1_Page.pdf
+          test ! -d out/projects/healthbridge
+          test ! -d out/projects/suicide-prevention-microservice
+          echo "Required routes and downloadable PDF found."

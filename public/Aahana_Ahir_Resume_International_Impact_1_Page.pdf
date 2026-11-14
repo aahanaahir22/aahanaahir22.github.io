@@ -1,0 +1,143 @@
+%PDF-1.4
+%ASCII-PDF
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R /Annots [7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 15 0 R] >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 7357 >>
+stream
+0.14 0.19 0.17 rg BT /F2 25 Tf 1 0 0 1 42 803 Tm (AAHANA AHIR) Tj ET
+0.14 0.19 0.17 rg BT /F2 9 Tf 1 0 0 1 42 785 Tm (FULL-STACK DEVELOPER  |  BACKEND ENGINEERING  |  IT SUPPORT) Tj ET
+0.35 0.40 0.37 rg BT /F1 8.2 Tf 1 0 0 1 42 767 Tm (aahanaahir10@gmail.com  |  +91 8824690398  |  India  |  linkedin.com/in/aahanaahir02) Tj ET
+0.35 0.40 0.37 rg BT /F1 8.2 Tf 1 0 0 1 42 755 Tm (aahanaahir22.github.io  |  github.com/aahanaahir22) Tj ET
+0.14 0.23 0.18 RG 1.2 w 42 747 m 553 747 l S
+0.65 0.30 0.21 rg BT /F2 10 Tf 1 0 0 1 42 733 Tm (PROFESSIONAL SUMMARY) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 726 m 553 726 l S
+0.35 0.40 0.37 rg BT /F1 9 Tf 1 0 0 1 42 715 Tm (Final-year B.Tech Computer Science Engineering student \(CGPA 8.3/10; 2027\) building full-stack commerce,) Tj ET
+0.35 0.40 0.37 rg BT /F1 9 Tf 1 0 0 1 42 703 Tm (Python backend services and evidence-aware AI systems. Delivered FreezoneB2B with PostgreSQL, secure identity,) Tj ET
+0.35 0.40 0.37 rg BT /F1 9 Tf 1 0 0 1 42 691 Tm (typed APIs and role-based workflows; experienced in testing, documentation and cloud deployment.) Tj ET
+0.65 0.30 0.21 rg BT /F2 10 Tf 1 0 0 1 42 673 Tm (TECHNICAL SKILLS) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 666 m 553 666 l S
+0.14 0.19 0.17 rg BT /F2 8.6 Tf 1 0 0 1 42 655 Tm (Programming:) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 108 655 Tm (Python, Java, TypeScript, JavaScript, SQL) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.6 Tf 1 0 0 1 42 642 Tm (Full stack:) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 108 642 Tm (Next.js, React, FastAPI, Flask, REST APIs, HTML, CSS, Tailwind CSS) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.6 Tf 1 0 0 1 42 629 Tm (Data / auth:) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 108 629 Tm (Neon PostgreSQL, Drizzle ORM, Clerk, Zod, MySQL, SQLite) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.6 Tf 1 0 0 1 42 616 Tm (AI / ML:) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 108 616 Tm (PyTorch, scikit-learn, Pandas, NumPy, LLMs, RAG, FAISS) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.6 Tf 1 0 0 1 42 603 Tm (Cloud / QA:) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 108 603 Tm (AWS, Vercel, Docker, Git, GitHub, Postman, Unit Testing, API Testing) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.6 Tf 1 0 0 1 42 590 Tm (IT Support:) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 108 590 Tm (TCP/IP, DNS, DHCP, HTTP/HTTPS, Network Troubleshooting, Windows Diagnostics,) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 108 578 Tm (System Configuration, Hardware/Software Troubleshooting, End-User Support) Tj ET
+0.65 0.30 0.21 rg BT /F2 10 Tf 1 0 0 1 42 559 Tm (EDUCATION) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 552 m 553 552 l S
+0.14 0.19 0.17 rg BT /F2 9.1 Tf 1 0 0 1 42 542 Tm (B.Tech in Computer Science and Engineering) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.8 Tf 1 0 0 1 403 542 Tm (2023 - 2027) Tj ET
+0.35 0.40 0.37 rg BT /F1 8.6 Tf 1 0 0 1 42 529 Tm (Vellore Institute of Technology \(VIT\), Bhopal University  |  CGPA 8.3/10) Tj ET
+0.65 0.30 0.21 rg BT /F2 10 Tf 1 0 0 1 42 510 Tm (SELECTED PROJECTS) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 503 m 553 503 l S
+0.14 0.19 0.17 rg BT /F2 10.5 Tf 1 0 0 1 42 492 Tm (FreezoneB2B - Global B2B Sourcing & Commerce Platform) Tj ET
+0.35 0.40 0.37 rg BT /F1 8.1 Tf 1 0 0 1 42 478 Tm (Next.js | TypeScript | Clerk | Neon PostgreSQL | Drizzle ORM | Zod | Vercel) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.4 Tf 1 0 0 1 52 465 Tm (- Built deployed marketplace with verified-email onboarding, approved supplier offers, RFQs, quotations,) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.4 Tf 1 0 0 1 62 453 Tm (order records and stock reservations; researched 2,873 companies across 69 countries/regions.) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.4 Tf 1 0 0 1 52 441 Tm (- Catalogued 7,894 source-published range references; tested query service on 100k synthetic staging rows.) Tj ET
+0.35 0.40 0.37 rg BT /F1 8 Tf 1 0 0 1 62 429 Tm (Source listings are not verified sellers; payment and fulfilment integrations remain in rollout.) Tj ET
+0.14 0.19 0.17 rg BT /F2 10.2 Tf 1 0 0 1 42 410 Tm (OpsAssist AI - Evidence-backed Incident Diagnosis) Tj ET
+0.35 0.40 0.37 rg BT /F1 8.1 Tf 1 0 0 1 42 397 Tm (React | Python | FastAPI | PostgreSQL | FAISS | LLM API | Docker | AWS) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.4 Tf 1 0 0 1 52 385 Tm (- Developed incident intelligence platform correlating logs and alerts with cited runbook retrieval.) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.4 Tf 1 0 0 1 52 373 Tm (- Built API services, React monitoring dashboard and approval-gated synthetic remediation.) Tj ET
+0.14 0.19 0.17 rg BT /F2 10.2 Tf 1 0 0 1 42 354 Tm (IntegrateX - AI-powered API Integration & Workflow Automation) Tj ET
+0.35 0.40 0.37 rg BT /F1 8.1 Tf 1 0 0 1 42 341 Tm (React | Python | FastAPI | PostgreSQL | Redis | Celery | RAG | Docker) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.4 Tf 1 0 0 1 52 329 Tm (- Built natural-language-to-workflow system with typed API steps, validation and connector orchestration.) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.4 Tf 1 0 0 1 52 317 Tm (- Designed retries, idempotency, execution tracing and recovery for multi-step integrations.) Tj ET
+0.65 0.30 0.21 rg BT /F2 10 Tf 1 0 0 1 42 296 Tm (LEADERSHIP & EXPERIENCE) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 289 m 553 289 l S
+0.14 0.19 0.17 rg BT /F1 8.7 Tf 1 0 0 1 42 278 Tm (Project Lead / Technical Documentation - Planned architecture, APIs, integration, testing and deployment.) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.7 Tf 1 0 0 1 42 265 Tm (GirlScript Summer of Code 2024 - Open-source contribution using GitHub pull-request workflows.) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.7 Tf 1 0 0 1 42 252 Tm (Microsoft Technical Club - Core team member supporting workshops and student project showcases.) Tj ET
+0.65 0.30 0.21 rg BT /F2 10 Tf 1 0 0 1 42 232 Tm (CERTIFICATIONS) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 225 m 553 225 l S
+0.14 0.19 0.17 rg BT /F1 8.3 Tf 1 0 0 1 42 214 Tm (Google Analytics Certification - ) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.3 Tf 1 0 0 1 177 214 Tm (Google Digital Academy \(Skillshop\)) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.3 Tf 1 0 0 1 42 201 Tm (The Bits and Bytes of Computer Networking - ) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.3 Tf 1 0 0 1 239 201 Tm (Google) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.3 Tf 1 0 0 1 42 188 Tm (Google IT Support Certificate - ) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.3 Tf 1 0 0 1 177 188 Tm (Google) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.3 Tf 1 0 0 1 42 175 Tm (Introduction to Machine Learning - ) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.3 Tf 1 0 0 1 202 175 Tm (NPTEL) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.3 Tf 1 0 0 1 42 162 Tm (GEN AI Using IBM watsonx - ) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.3 Tf 1 0 0 1 171 162 Tm (IBM) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.3 Tf 1 0 0 1 42 149 Tm (AWS Educate Introduction to Generative AI - ) Tj ET
+0.14 0.19 0.17 rg BT /F2 8.3 Tf 1 0 0 1 258 149 Tm (Amazon Web Services) Tj ET
+0.65 0.30 0.21 rg BT /F2 10 Tf 1 0 0 1 42 128 Tm (ACHIEVEMENTS & LANGUAGES) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 121 m 553 121 l S
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 42 109 Tm (500+ Google Cloud Skills Boost Arcade badges in cloud, data, security and generative AI learning tracks.) Tj ET
+0.14 0.19 0.17 rg BT /F1 8.6 Tf 1 0 0 1 42 96 Tm (Languages: English \(Fluent\), Hindi \(Native\), German \(B1\), Spanish \(B1\), French \(A2\), Japanese \(A2\).) Tj ET
+0.80 0.82 0.80 RG 0.7 w 42 78 m 553 78 l S
+0.35 0.40 0.37 rg BT /F1 7.7 Tf 1 0 0 1 42 64 Tm (Portfolio: aahanaahir22.github.io  |  FreezoneB2B: freezoneb2b.vercel.app) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42 763 170 778] /Border [0 0 0] /A << /S /URI /URI (mailto:aahanaahir10@gmail.com) >> >>
+endobj
+8 0 obj
+<< /Type /Annot /Subtype /Link /Rect [305 763 515 778] /Border [0 0 0] /A << /S /URI /URI (https://www.linkedin.com/in/aahanaahir02/) >> >>
+endobj
+9 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42 752 205 762] /Border [0 0 0] /A << /S /URI /URI (https://aahanaahir22.github.io) >> >>
+endobj
+10 0 obj
+<< /Type /Annot /Subtype /Link /Rect [210 752 369 762] /Border [0 0 0] /A << /S /URI /URI (https://github.com/aahanaahir22) >> >>
+endobj
+11 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42 485 553 505] /Border [0 0 0] /A << /S /URI /URI (https://freezoneb2b.vercel.app/) >> >>
+endobj
+12 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42 402 553 425] /Border [0 0 0] /A << /S /URI /URI (https://aahanaahir22.github.io/opsassist-ai/) >> >>
+endobj
+13 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42 347 553 367] /Border [0 0 0] /A << /S /URI /URI (https://aahanaahir22.github.io/integratex/) >> >>
+endobj
+14 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42 62 225 76] /Border [0 0 0] /A << /S /URI /URI (https://aahanaahir22.github.io) >> >>
+endobj
+15 0 obj
+<< /Type /Annot /Subtype /Link /Rect [232 62 553 76] /Border [0 0 0] /A << /S /URI /URI (https://freezoneb2b.vercel.app/) >> >>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000020 00000 n 
+0000000069 00000 n 
+0000000126 00000 n 
+0000000332 00000 n 
+0000000402 00000 n 
+0000000477 00000 n 
+0000007885 00000 n 
+0000008027 00000 n 
+0000008182 00000 n 
+0000008325 00000 n 
+0000008471 00000 n 
+0000008616 00000 n 
+0000008774 00000 n 
+0000008930 00000 n 
+0000009072 00000 n 
+trailer
+<< /Size 16 /Root 1 0 R >>
+startxref
+9216
+%%EOF
