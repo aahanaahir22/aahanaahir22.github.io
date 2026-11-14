@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, GitBranch as Github } from "lucide-react";
 import CaseExplorer from "@/components/CaseExplorer";
 import { getProject, projects } from "@/data/projects";
 
